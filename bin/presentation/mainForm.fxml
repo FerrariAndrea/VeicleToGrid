@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="700.0" prefWidth="1001.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MyControllerMainForm">
+   <top>
+      <AnchorPane prefHeight="40.0" prefWidth="837.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="LoginButton" layoutX="63.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#clickLoginButton" prefHeight="62.0" prefWidth="99.0" text="Login" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <MenuBar layoutX="14.0" layoutY="4.0" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem fx:id="fileViewUserPanel" disable="true" mnemonicParsing="false" onAction="#clickViewUserPanel" text="View UserPanel" />
+                        <MenuItem fx:id="fileViewPanelControl" mnemonicParsing="false" onAction="#clickViewPanelControl" text="View PanelControl" />
+                        <MenuItem fx:id="fileViewWheaterForecast" mnemonicParsing="false" onAction="#clickViewWheaterForecast" text="View weather forecast" />
+                    <MenuItem fx:id="fileClose" mnemonicParsing="false" onAction="#clickViewClose" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Label fx:id="LabelTime" layoutX="408.0" prefHeight="40.0" prefWidth="170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="415.0" AnchorPane.rightAnchor="416.0" AnchorPane.topAnchor="0.0" />
+            <Label fx:id="labelNickName" layoutX="732.0" prefWidth="170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.19682539682539682" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ProgressBar fx:id="progressBarStorage" layoutY="170.0" prefWidth="200.0" progress="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="170.0" />
+                  <Label alignment="CENTER" layoutY="107.0" prefHeight="37.0" prefWidth="200.0" text="Charge storage" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="107.0" />
+                  <BarChart fx:id="chartParking" layoutY="329.0" prefHeight="314.0" prefWidth="193.0" title="State parking space" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" fx:id="x" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="y" label="Number" side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane dividerPositions="0.6803921568627451" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane fx:id="panelParking" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: rgb(120, 222, 198);">
+                           <children>
+                              <ImageView fx:id="imageParking" fitHeight="108.0" fitWidth="129.0" layoutX="270.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="291.0" AnchorPane.rightAnchor="376.0">
+                                 <image>
+                                    <Image url="@../../immagini/parking.jpeg" />
+                                 </image>
+                              </ImageView>
+                           </children></AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TextArea fx:id="logTextArea" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
