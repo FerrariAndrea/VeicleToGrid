@@ -14,7 +14,7 @@ public class Step implements Runnable {
 				if(_pause){ 
 					_sem.acquire(); 
 					_pause = false;
-				}3
+				}
 				
 				//rimozione vecchie prenotazioni
 				Parking.GetInstance().removeOldRserving();

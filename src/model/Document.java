@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import persistence.VTDSibConnector;
 import presentation.IObserver;
 
 public class Document implements ISubject<LocalDateTime>{
@@ -15,7 +16,6 @@ public class Document implements ISubject<LocalDateTime>{
 	private Step _step;
 	private ArrayList<IObserver<LocalDateTime>> _observer = new ArrayList<>();
 	private int _sleepTimeStep = 500;
-	
 	private Document(){
 		_registeredUser = new ArrayList<>();
 		_step = new Step();
@@ -105,10 +105,24 @@ public class Document implements ISubject<LocalDateTime>{
 	}
 	
 	public void saveOnSIB(){
-		
+		try {
+			VTDSibConnector.saveSnap();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void loadFromSIB(){
-		
+		/*
+		try {
+			VTDSibConnector.stampSnap();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
+	
+	
 }

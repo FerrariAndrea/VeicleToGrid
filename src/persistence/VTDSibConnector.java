@@ -1,6 +1,7 @@
 package persistence;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import model.Document;
@@ -10,6 +11,7 @@ import model.WheaterForecast;
 
 public class VTDSibConnector {
 
+	private static int  MAX_RATE =150;
 	public static void saveSnap() throws Exception {
 		KPConnector.GetInstance().join();
 		String nameSpace = "http://veicletogrid/"+Document.GetInstance().getTime().toString()+"#";
@@ -17,7 +19,7 @@ public class VTDSibConnector {
 		triples.addAll(Parking.GetInstance().toTriple(nameSpace));
 		triples.addAll(WheaterForecast.GetInstance().toTriple(nameSpace));
 		triples.addAll(Storage.GetInstance().toTriple(nameSpace));
-		KPConnector.GetInstance().insert(triples);
+		KPConnector.GetInstance().insert(triples,MAX_RATE);
 		//ParkingSpace	
 		//Parking  				*
 		//Reserving
@@ -26,8 +28,23 @@ public class VTDSibConnector {
 		//Storage 				*
 	}
 	
-	public static List<Triple> getSnap(){
-			return null;
+	public static List<Triple> getSnap() throws Exception{
+			KPConnector.GetInstance().join();
+		return KPConnector.GetInstance().query(null, null, null, null, null);
+	}
+	public static void stampSnap() throws Exception{
+		KPConnector.GetInstance().join();
+		for (Iterator<Triple> i = 	KPConnector.GetInstance().query(null, null, null, null, null).iterator(); i.hasNext();) {	
+			System.out.print(i.next().toString());
+		}
 	}
 	
+	public static void main(String[] args)
+	{
+		try {
+			stampSnap();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

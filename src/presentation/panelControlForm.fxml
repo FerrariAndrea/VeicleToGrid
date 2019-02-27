@@ -39,7 +39,7 @@
             </ImageView>
          </graphic>
       </ToggleButton>
-      <Slider fx:id="speedTimeSlider" blockIncrement="1.0" disable="true" layoutX="130.0" layoutY="257.0" max="1000.0" value="500.0" />
+      <Slider fx:id="speedTimeSlider" blockIncrement="1.0" disable="true" layoutX="130.0" layoutY="257.0" max="1000.0"  min="5.0" value="500.0" />
       <Label alignment="CENTER" layoutX="150.0" layoutY="216.0" minHeight="30.0" prefWidth="100.0" text="Speed time" />
    </children>
 </AnchorPane>

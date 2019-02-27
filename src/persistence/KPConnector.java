@@ -14,6 +14,7 @@ public class KPConnector {
 	private static String default_host = "localhost";
 	private static int default_port =10111;
 	private static String defaultSubjectType = "uri";
+
 	
 	//-----------------Istance of singleton
 	private static KPConnector _instance=null;	
@@ -29,9 +30,12 @@ public class KPConnector {
 	//-----------------KPConnector
 	private KPICore _kp; 
 	private boolean _debug;
+	private boolean _joined=false;
 	private KPConnector(String host,int port,String sib_name){
+		_joined=false;
 		_kp = new KPICore(host, port, sib_name);
-		enableDebug(false);	
+		enableDebug(false);
+		
 	}
 	
 	
@@ -47,8 +51,15 @@ public class KPConnector {
 		}
 	}
 	public boolean isDebugEnable() {return _debug;}
-	
+
 	public void join() throws Exception {
+		if(!_joined) {
+			forceJoin();
+			_joined=true;
+		}
+	}
+	
+	public void forceJoin() throws Exception {
 		SIBResponse resp= _kp.join();
 		if(!resp.isConfirmed()) {
 			throw new Exception("Error joining the SIB:" + resp.Message);
