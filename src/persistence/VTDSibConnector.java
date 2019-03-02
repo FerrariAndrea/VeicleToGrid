@@ -41,6 +41,7 @@ public class VTDSibConnector {
 	
 	public static void main(String[] args)
 	{
+		System.out.println("Output SIB:");
 		try {
 			stampSnap();
 		} catch (Exception e) {
