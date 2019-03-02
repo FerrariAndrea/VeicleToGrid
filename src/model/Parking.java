@@ -133,10 +133,10 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 	}
 	
 
-	public List<Triple> toTriple(String nameSpace){
+	public List<Triple> toTriple(String nameSpace,String timesamp){
 		List<Triple> ris = new ArrayList<Triple>();
 		for (Iterator<ParkingSpace> i = _parkingSpace.iterator(); i.hasNext();) {			
-			ris.addAll(i.next().toTriple(nameSpace));
+			ris.addAll(i.next().toTriple(nameSpace,timesamp));
 		}
 		return ris;
 	}

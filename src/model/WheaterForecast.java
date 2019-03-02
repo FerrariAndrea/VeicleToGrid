@@ -73,10 +73,10 @@ public class WheaterForecast implements ISubject<SingleForecast>{
 	}
 	
 	
-	public List<Triple> toTriple(String nameSpace){
+	public List<Triple> toTriple(String nameSpace,String timestamp){
 		List<Triple> ris = new ArrayList<Triple>();
 		for (Iterator<SingleForecast> i = this._queue.iterator(); i.hasNext();) {	
-			ris.addAll(i.next().toTriple(nameSpace));
+			ris.addAll(i.next().toTriple(nameSpace,timestamp));
 		}		
 		return ris;
 	}

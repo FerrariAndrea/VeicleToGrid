@@ -17,4 +17,10 @@ public class Utilities {
 		LocalDateTime temp = d.atTime(t);
 		return getTimeStamp(temp);
 	}
+	public static String getTimeStamp(LocalDate d) {
+		return  Long.toString(d.toEpochDay());
+	}
+	public static String getTimeStamp(LocalTime t) {
+		return Long.toString(t.toSecondOfDay());
+	}
 }

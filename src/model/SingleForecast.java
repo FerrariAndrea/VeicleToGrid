@@ -11,11 +11,14 @@ import java.util.Map;
 
 import persistence.Ontology;
 import persistence.Triple;
+import utils.BrokerId;
 import utils.Utilities;
 
 public class SingleForecast {
 	private Map<TimeSlot, Wheater> _map;
 	private LocalDate _date;
+	private int _id;
+	
 	
 	public SingleForecast(Wheater[] forecasts, LocalDate date){
 		if(forecasts.length != 12) throw new IllegalArgumentException("The argument must have 12 elements");
@@ -28,8 +31,13 @@ public class SingleForecast {
 			_map.put(new TimeSlot(start, end), forecasts[i]);
 		}
 		this._date = date;
+		this._id = BrokerId.getInstance().getNextId();
 	}
 	
+	public int get_id() {
+		return _id;
+	}
+
 	public Wheater get(LocalTime time){
 		for(TimeSlot f : _map.keySet()){
 			if(f.contain(time)) return _map.get(f);
@@ -77,12 +85,26 @@ public class SingleForecast {
 		
 	}
 	
-	public List<Triple> toTriple(String nameSpace){
+	public List<Triple> toTriple(String nameSpace,String timestamp){
 		List<Triple> ris = new ArrayList<Triple>();
+		String screen = getTripleScreenSubject(timestamp);
+		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasScreen,screen,this.getClass().getName(),this.getClass().getName()));
+		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasDate,Utilities.getTimeStamp(this._date),this.getClass().getName(),this._date.getClass().getName()));
 		for (Iterator<TimeSlot> i = _map.keySet().iterator(); i.hasNext();) {	
 			TimeSlot temp =i.next();
-			ris.add(new Triple(nameSpace,"Forecast_"+Utilities.getTimeStamp(this._date,temp.getStartTime()),Ontology.Is,_map.get(temp).toString()));
+			ris.add(new Triple(nameSpace,screen,Ontology.HasWheater,getTripleWheaterSubject(temp,timestamp),this.getClass().getName(),temp.getClass().getName()));
+			ris.add(new Triple(nameSpace,getTripleWheaterSubject(temp,timestamp),Ontology.At,_map.get(temp).toString(),temp.getClass().getName(),temp.getClass().getName()));
+			ris.add(new Triple(nameSpace,getTripleWheaterSubject(temp,timestamp),Ontology.Is,_map.get(temp).toString(),temp.getClass().getName(),_map.get(temp).getClass().getName()));
 		}		
 		return ris;
+	}
+	public String getTripleSubject(){
+		return "Forecast_" + this._id;
+	}
+	public String getTripleScreenSubject(String timestamp){
+		return getTripleSubject()+"_"+timestamp;
+	}
+	public String getTripleWheaterSubject(TimeSlot ts ,String timestamp) {
+		return getTripleScreenSubject(timestamp)+"_"+Utilities.getTimeStamp(ts.getStartTime());
 	}
 }

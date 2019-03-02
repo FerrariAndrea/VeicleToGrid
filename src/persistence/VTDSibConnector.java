@@ -14,18 +14,13 @@ public class VTDSibConnector {
 	private static int  MAX_RATE =150;
 	public static void saveSnap() throws Exception {
 		KPConnector.GetInstance().join();
-		String nameSpace = "http://veicletogrid/"+Document.GetInstance().getTime().toString()+"#";
+		String nameSpace = "http://veicletogrid/#";
+		String timestamp = Document.GetInstance().getTime().toString();
 		List<Triple> triples = new ArrayList<Triple>();
-		triples.addAll(Parking.GetInstance().toTriple(nameSpace));
-		triples.addAll(WheaterForecast.GetInstance().toTriple(nameSpace));
-		triples.addAll(Storage.GetInstance().toTriple(nameSpace));
+		triples.addAll(Parking.GetInstance().toTriple(nameSpace,timestamp));
+		triples.addAll(WheaterForecast.GetInstance().toTriple(nameSpace,timestamp));
+		triples.addAll(Storage.GetInstance().toTriple(nameSpace,timestamp));
 		KPConnector.GetInstance().insert(triples,MAX_RATE);
-		//ParkingSpace	
-		//Parking  				*
-		//Reserving
-		//SingleForecast
-		//WheaterForecast   	*
-		//Storage 				*
 	}
 	
 	public static List<Triple> getSnap() throws Exception{
@@ -35,7 +30,7 @@ public class VTDSibConnector {
 	public static void stampSnap() throws Exception{
 		KPConnector.GetInstance().join();
 		for (Iterator<Triple> i = 	KPConnector.GetInstance().query(null, null, null, null, null).iterator(); i.hasNext();) {	
-			System.out.print(i.next().toString());
+			System.out.println(i.next().toString());
 		}
 	}
 	

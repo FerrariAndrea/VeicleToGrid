@@ -284,19 +284,27 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		
 	
 	}
-	public List<Triple> toTriple(String nameSpace){
+	public List<Triple> toTriple(String nameSpace, String timestamp){
 		List<Triple> ris = new ArrayList<Triple>();
+		String screen = getTripleScreenSubject(timestamp);
+		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasScreen,screen,this.getClass().getName(),this.getClass().getName()));
+		ris.add(new Triple(nameSpace,screen,Ontology.Is,Boolean.toString(this.isFree()),this.getClass().getName(),Boolean.class.getName()));
 		for (Iterator<Reserving> i = this._reserving.iterator(); i.hasNext();) {	
 			Reserving temp = i.next();
-			ris.addAll(temp.toTriple(nameSpace));
-			ris.add(new Triple(nameSpace,"ParkingSpace_"+this._ID,Ontology.HasReserving,temp.getTripleSubject()));			
+			ris.addAll(temp.toTriple(nameSpace,timestamp));
+			ris.add(new Triple(nameSpace,screen,Ontology.HasReserving,temp.getTripleSubject(),this.getClass().getName(),temp.getClass().getName()));			
 		}	
-		ris.add(new Triple(nameSpace,"ParkingSpace_"+this._ID,Ontology.Is,Boolean.toString(this.isFree())));
 		try{
-			ris.add(new Triple(nameSpace,"ParkingSpace_"+this._ID,Ontology.HasVeicleStorage,Integer.toString(this.getActualVehicleStorage())));
+			ris.add(new Triple(nameSpace,screen,Ontology.HasVeicleStorage,Integer.toString(this.getActualVehicleStorage()),this.getClass().getName(),Integer.class.getName()));
 		}catch(Exception e) {
 			//e
 		}
 		return ris;
+	}
+	public String getTripleSubject(){
+		return "ParkingSpace_"+this._ID;
+	}
+	public String getTripleScreenSubject(String timestamp){
+		return getTripleSubject()+"_"+timestamp;
 	}
 }

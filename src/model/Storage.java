@@ -39,10 +39,14 @@ public class Storage implements ISubject<Storage>{
 			o.update(this);
 	}
 	
-	public List<Triple> toTriple(String nameSpace){
+	public List<Triple> toTriple(String nameSpace,String timestamp){
 		List<Triple> ris = new ArrayList<Triple>();			
-		ris.add(new Triple(nameSpace,"Storage",Ontology.Is,Float.toString(_actualStorage)));
+		ris.add(new Triple(nameSpace,"Storage",Ontology.HasScreen,getTripleScreenSubject(timestamp),this.getClass().getName(),this.getClass().getName()));
+		ris.add(new Triple(nameSpace,getTripleScreenSubject(timestamp),Ontology.Is,Float.toString(_actualStorage),this.getClass().getName(),Float.class.getName()));
 		//ris.add(new Triple(nameSpace,"Storage",Ontology.Is,Float.toString(InitialChargeStorage)));
 		return ris;
+	}
+	public String getTripleScreenSubject(String timestamp){
+		return "Storage_"+timestamp;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import persistence.Ontology;
 import persistence.Triple;
+import utils.BrokerId;
 import utils.Utilities;
 
 public class Reserving implements Comparable<Reserving>{
@@ -14,15 +15,22 @@ public class Reserving implements Comparable<Reserving>{
 	private LocalDateTime endTimeReserving;
 	private int minCharge;
 	private ParkingSpace parkingSpace;
+	private int id;
 	
+
 	public Reserving(RegisteredUser user, LocalDateTime startTimeReserving, LocalDateTime endTimeReserving, int minCharge, ParkingSpace p){
 		this.user = user;
 		this.startTimeReserving = startTimeReserving;
 		this.endTimeReserving = endTimeReserving;
 		this.minCharge = minCharge;
 		this.parkingSpace = p;
+		this.id = BrokerId.getInstance().getNextId();
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public RegisteredUser getUser() {
 		return user;
 	}
@@ -48,16 +56,21 @@ public class Reserving implements Comparable<Reserving>{
 		return startTimeReserving.compareTo(o.getStartTimeReserving());
 	}
 	
-	public List<Triple> toTriple(String nameSpace){
+	public List<Triple> toTriple(String nameSpace,String timestamp){
+		String screen = this.getTripleScreenSubject(timestamp);
 		List<Triple> ris = new ArrayList<Triple>();
-		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasUser,this.user.getNickname()));
-		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.StartTime,Utilities.getTimeStamp(this.startTimeReserving)));
-		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.EndTime,Utilities.getTimeStamp(this.endTimeReserving)));
-		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.MinCharge,Integer.toString(minCharge)));
+		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasScreen,screen,this.getClass().getName(),this.getClass().getName()));
+		ris.add(new Triple(nameSpace,screen,Ontology.HasUser,this.user.getNickname(),this.getClass().getName(),String.class.getName()));
+		ris.add(new Triple(nameSpace,screen,Ontology.StartTime,Utilities.getTimeStamp(this.startTimeReserving),this.getClass().getName(),this.startTimeReserving.getClass().getName()));
+		ris.add(new Triple(nameSpace,screen,Ontology.EndTime,Utilities.getTimeStamp(this.endTimeReserving),this.getClass().getName(),this.endTimeReserving.getClass().getName()));
+		ris.add(new Triple(nameSpace,screen,Ontology.MinCharge,Integer.toString(minCharge),this.getClass().getName(),Integer.class.getName()));
 		//ris.addAll(this.parkingSpace.toTriple(nameSpace)); RIDONDANTE
 		return ris;
 	}
 	public String getTripleSubject(){
-		return "Reserving_" + this.user+"_"+Utilities.getTimeStamp(this.startTimeReserving);
+		return "Reserving_" + this.id;
+	}
+	public String getTripleScreenSubject(String timestamp){
+		return getTripleSubject()+"_"+timestamp;
 	}
 }

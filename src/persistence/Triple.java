@@ -3,10 +3,7 @@ package persistence;
 import java.util.Vector;
 
 public class Triple {
-	//---------------------------------DEFAULT
-	public static String defaultNameSpace = "http://veicletogrid#";
-	public static String defaultSubjectType = "uri";
-	public static String defaultObjectType = "uri";
+
 	//----------------------------------Triple
 	private String _nameSpace;
 	private String _subject;
@@ -23,15 +20,7 @@ public class Triple {
 		this._subjectType = _subjectType;
 		this._objectType = _objectType;
 	}
-	public Triple(String _nameSpace, String _subject, String _predicate, String _object) {
-		this(_nameSpace,_subject,_predicate,_object,defaultSubjectType,defaultObjectType);
-	}	
-	public Triple( String _subject, String _predicate, String _object) {
-		this(defaultNameSpace,_subject,_predicate,_object,defaultSubjectType,defaultObjectType);
-	}
-	public Triple(String _subject, String _predicate, String _object,String _subjectType,String _objectType) {
-		this(defaultNameSpace,_subject,_predicate,_object,_subjectType,_objectType);
-	}	
+
 	public String get_nameSpace() {
 		return _nameSpace;
 	}

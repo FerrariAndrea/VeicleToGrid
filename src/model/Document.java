@@ -16,6 +16,7 @@ public class Document implements ISubject<LocalDateTime>{
 	private Step _step;
 	private ArrayList<IObserver<LocalDateTime>> _observer = new ArrayList<>();
 	private int _sleepTimeStep = 500;
+	private String _nameSpace = "http://veicletogrid";
 	private Document(){
 		_registeredUser = new ArrayList<>();
 		_step = new Step();
@@ -39,7 +40,14 @@ public class Document implements ISubject<LocalDateTime>{
 		_currentTime = _currentTime.plusMinutes(1);
 		notifyObserver();
 	}
-	
+	public String get_nameSpace() {
+		return _nameSpace;
+	}
+
+	public void set_nameSpace(String _nameSpace) {
+		this._nameSpace = _nameSpace;
+	}
+
 	public boolean isExit(){
 		return _exitApplication;
 	}

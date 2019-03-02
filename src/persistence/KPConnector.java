@@ -14,7 +14,7 @@ public class KPConnector {
 	private static String default_host = "localhost";
 	private static int default_port =10111;
 	private static String defaultSubjectType = "uri";
-
+	
 	
 	//-----------------Istance of singleton
 	private static KPConnector _instance=null;	
@@ -96,7 +96,11 @@ public class KPConnector {
 			insert(triples);
 		}
 	}
-	
+	public void insert(Triple t) throws Exception {
+		Vector<Vector<String>> triples = new Vector<Vector<String>>();
+		triples.add(t.toVector());		
+		insert(triples);
+	}
 	public void insert(List<Triple> t) throws Exception {
 		insert(t,0);
 	}
