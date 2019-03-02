@@ -164,7 +164,6 @@ public class KPConnector {
 		if (triples != null){
 			for(int i=0; i<triples.size() ; i++ ){
 				Vector<String> t=triples.get(i);
-				System.out.println(t);
 				String temp[] = t.get(0).split("#");
 				String nameSpace ="";
 				String s = "";
