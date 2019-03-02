@@ -67,12 +67,17 @@ public class Triple {
 		triple.add(_objectType);
 		return triple;
 	}
-	
+	/*
 	@Override
 	public String toString() {
 		return "<"+_nameSpace+_subject+":"+_subjectType+"><"+_nameSpace+_predicate+"><"+_nameSpace+_object+":"+_objectType+">";		
 		
 	}
-
+	*/
+	@Override
+	public String toString() {
+		return "<"+_nameSpace+_subject+"><"+_nameSpace+_predicate+"><"+_nameSpace+_object+">";		
+		
+	}
 	
 }

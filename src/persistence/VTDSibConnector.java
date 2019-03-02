@@ -8,6 +8,7 @@ import model.Document;
 import model.Parking;
 import model.Storage;
 import model.WheaterForecast;
+import utils.Utilities;
 
 public class VTDSibConnector {
 
@@ -15,7 +16,7 @@ public class VTDSibConnector {
 	public static void saveSnap() throws Exception {
 		KPConnector.GetInstance().join();
 		String nameSpace = "http://veicletogrid/#";
-		String timestamp = Document.GetInstance().getTime().toString();
+		String timestamp = Utilities.getTimeStamp(Document.GetInstance().getTime());
 		List<Triple> triples = new ArrayList<Triple>();
 		triples.addAll(Parking.GetInstance().toTriple(nameSpace,timestamp));
 		triples.addAll(WheaterForecast.GetInstance().toTriple(nameSpace,timestamp));
