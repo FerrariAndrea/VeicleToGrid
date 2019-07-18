@@ -20,6 +20,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import model.Document;
+import model.Storage;
+import model.StoragePolicyFactory;
 
 public class MyControllerPanelControlForm implements Initializable{
 	
@@ -52,11 +54,19 @@ public class MyControllerPanelControlForm implements Initializable{
 	        public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				
 				if (radioButtonPolitics.getSelectedToggle() != null) {
-					//parte l'applicazione
-					if(!Document.GetInstance().isStart()) Document.GetInstance().start();
 					
 					RadioButton button = (RadioButton)radioButtonPolitics.getSelectedToggle();
-		            System.out.println(button.getText());
+		            switch (button.getText()){
+		            case "Cheap":
+		            	Storage.GetInstance().setStoragePolicy(StoragePolicyFactory.CreateCheapStoragePolicy());
+		            	break;
+		            case "Expensive":
+		            	Storage.GetInstance().setStoragePolicy(StoragePolicyFactory.CreateExpensiveStoragePolicy());
+		            	break;
+		            }
+		            
+		          //parte l'applicazione
+				  if(!Document.GetInstance().isStart()) Document.GetInstance().start();
 		             
 		           //disabilito i radio button
 					radioButtonPolitics.getToggles().forEach(toggle -> {

@@ -1,8 +1,11 @@
 package model;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +57,7 @@ public class RandomGeneratorFactory {
 					
 					if(_random.nextDouble() <= probability){
 						//l'evento si verificherà, lo creo
-						ParkingCostumerEntryEvent event = new ParkingCostumerEntryEvent(_random.nextInt(59) + 1);
+						ParkingCostumerEntryEvent event = new ParkingCostumerEntryEvent(_random.nextInt(ConstantProject.maximumVehicleCapacityWhenArriveToParkingSpace - 1) + 1);
 						
 						//aggiungo l'evento nel ContainerEvent per poter poi essere schedulato
 						ContainerEvent.GetInstance().addEvent(event);
@@ -90,6 +93,7 @@ public class RandomGeneratorFactory {
 	
 	private class ParkingCostumerEntryEvent implements IEvent{
 		private int _carStorage;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		
 		public ParkingCostumerEntryEvent(int carStorage){
 			this._carStorage = carStorage;
@@ -106,7 +110,7 @@ public class RandomGeneratorFactory {
 				ParkingSpace p = Parking.GetInstance().occupyParkingSpace(_carStorage); 
 				if(p != null){
 					//è disponibile un parcheggio
-					log = new Log("A new costumer without reserving has entered in the parking. His car have " + _carStorage);
+					log = new Log("A new costumer without reserving has entered in the parking at "+ Document.GetInstance().getTime().format(formatter)+ ". His car have " + _carStorage + "KWh of charge");
 					
 					//devo creare il thread che si occuperà di liberare il parcheggio dopo x tempo arbitrario
 					IGeneratorEvent randomExit = RandomGeneratorFactory.CreateGeneratorExitEvent(p);
@@ -189,10 +193,10 @@ public class RandomGeneratorFactory {
 		public void run() {
 			try {
 				//calcolo il tempo arbitrario dopo il quale dovrà generare l'evento di uscita del cliente
-				long maxTime = Parking._maxDurationCarPark;
+				long maxTime = ConstantProject.maxDurationCarPark;
 				if(_p.getReserving().size() > 0) maxTime = Duration.between(Document.GetInstance().getTime(), _p.getReserving().first().getStartTimeReserving()).toMinutes();
-				if(maxTime > Parking._maxDurationCarPark) maxTime = Parking._maxDurationCarPark;
-				long time = ThreadLocalRandom.current().nextLong(Parking._minDurationCarPark -1 , maxTime) + 1;
+				if(maxTime > ConstantProject.maxDurationCarPark) maxTime = ConstantProject.maxDurationCarPark;
+				long time = ThreadLocalRandom.current().nextLong(ConstantProject.minDurationCarPark -1 , maxTime) + 1;
 				
 				//mi sospendo su un semaforo privato
 				MySemaphore sem = new MySemaphore(0, Document.GetInstance().getTime().plusMinutes(time));
@@ -217,19 +221,22 @@ public class RandomGeneratorFactory {
 	
 	private class ParkingCostumerExitEvent implements IEvent{
 		private ParkingSpace _parkingSpace;
+		private DecimalFormat df2 = new DecimalFormat("#.##");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		
 		public ParkingCostumerExitEvent(ParkingSpace parking){
 			this._parkingSpace = parking;
+			df2.setRoundingMode(RoundingMode.DOWN);
 		}
 		
 		@Override
 		public Log operation() {
 			//ottengo la carica finale del veicolo e libero il posteggio
-			int storage = _parkingSpace.getActualVehicleStorage();
+			double storage = _parkingSpace.getActualVehicleStorage();
 			_parkingSpace.makeFree();
 			
 			//fornisco il log in uscita
-			Log log = new Log("A costumer without reserving  has just left his parking space. His car had " + storage + " of charge");
+			Log log = new Log("A costumer without reserving  has just left his parking space at "+ Document.GetInstance().getTime().format(formatter) +". His car had " + df2.format(storage) + "KWh of charge");
 			return log;
 		}
 	}

@@ -28,11 +28,8 @@ public class Step implements Runnable {
 				//gestione semafori
 				ContainerEvent.GetInstance().attivateSemaphore();
 				
-				//aggiornamento carica storage
-				
-				
-				//aggiornamento carica veicoli
-				
+				//aggiornamento cariche in base alla politica
+				Storage.GetInstance().chargeUpdate();
 				
 				//incremento del tempo
 				Document.GetInstance().updateTime();

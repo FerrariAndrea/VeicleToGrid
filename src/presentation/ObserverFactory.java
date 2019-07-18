@@ -122,7 +122,7 @@ public class ObserverFactory {
 		}
 		
 		private void busy(ParkingSpace p){
-			getControl().setProgress(((double)p.getActualVehicleStorage()) / 80);
+			getControl().setProgress(((double)p.getActualVehicleStorage()) / ConstantProject.maxChargeVehicleStorage);
 			getControl().setOpacity(1);
 			setColour();
 		}
@@ -152,7 +152,7 @@ public class ObserverFactory {
 
 				@Override
 				public void run() {
-					getControl().setProgress(storage.getActualCharge() / Storage.InitialChargeStorage);
+					getControl().setProgress(storage.getActualCharge() / ConstantProject.InitialChargeStorage);
 					getControl().getStyleClass().removeAll(barColorStyleClasses);
 					setColour();
 				}

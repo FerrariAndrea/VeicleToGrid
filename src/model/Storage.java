@@ -9,17 +9,21 @@ import presentation.IObserver;
 
 public class Storage implements ISubject<Storage>{
 	private static Storage _instance = null;
-	public static final float InitialChargeStorage = Parking.GetInstance().getParkingSpace().size() * 4;
-	private float _actualStorage = InitialChargeStorage;
+	private double _actualStorage = ConstantProject.InitialChargeStorage;
 	private ArrayList<IObserver<Storage>> _observer = new ArrayList<>();
+	private IStoragePolicy _policy = null;
 	
 	public static Storage GetInstance(){
 		if(_instance == null) _instance = new Storage();
 		return _instance;
 	}
 
-	public float getActualCharge(){
+	public double getActualCharge(){
 		return _actualStorage;
+	}
+	
+	public void setStoragePolicy(IStoragePolicy policy){
+		_policy = policy;
 	}
 	
 	@Override
@@ -39,10 +43,15 @@ public class Storage implements ISubject<Storage>{
 			o.update(this);
 	}
 	
+	public void chargeUpdate(){
+		_actualStorage = _policy.modifyChargeStorage();
+		notifyObserver();
+	}
+	
 	public List<Triple> toTriple(String nameSpace,String timestamp){
 		List<Triple> ris = new ArrayList<Triple>();			
 		ris.add(new Triple(nameSpace,"Storage",Ontology.HasScreen,getTripleScreenSubject(timestamp),this.getClass().getName(),this.getClass().getName()));
-		ris.add(new Triple(nameSpace,getTripleScreenSubject(timestamp),Ontology.Is,Float.toString(_actualStorage),this.getClass().getName(),Float.class.getName()));
+		ris.add(new Triple(nameSpace,getTripleScreenSubject(timestamp),Ontology.Is,Double.toString(_actualStorage),this.getClass().getName(),Float.class.getName()));
 		//ris.add(new Triple(nameSpace,"Storage",Ontology.Is,Float.toString(InitialChargeStorage)));
 		return ris;
 	}

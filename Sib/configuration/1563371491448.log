@@ -1,0 +1,44 @@
+!SESSION 2019-07-17 15:51:31.304 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_211
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+
+!ENTRY org.eclipse.osgi 4 0 2019-07-17 15:51:31.504
+!MESSAGE Error reading configuration: ReliableFile is corrupt
+!STACK 0
+java.io.IOException: ReliableFile is corrupt
+	at org.eclipse.osgi.framework.internal.reliablefile.ReliableFile.getInputStream(ReliableFile.java:323)
+	at org.eclipse.osgi.framework.internal.reliablefile.ReliableFileInputStream.<init>(ReliableFileInputStream.java:92)
+	at org.eclipse.osgi.framework.internal.reliablefile.ReliableFileInputStream.<init>(ReliableFileInputStream.java:66)
+	at org.eclipse.osgi.storagemanager.StorageManager.updateTable(StorageManager.java:488)
+	at org.eclipse.osgi.storagemanager.StorageManager.open(StorageManager.java:709)
+	at org.eclipse.osgi.internal.baseadaptor.BaseStorage.initFileManager(BaseStorage.java:220)
+	at org.eclipse.osgi.internal.baseadaptor.BaseStorage.initialize(BaseStorage.java:154)
+	at org.eclipse.osgi.baseadaptor.BaseAdaptor.initializeStorage(BaseAdaptor.java:123)
+	at org.eclipse.osgi.framework.internal.core.Framework.initialize(Framework.java:190)
+	at org.eclipse.osgi.framework.internal.core.Framework.<init>(Framework.java:162)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:261)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:175)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.main(EclipseStarter.java:150)
+
+!ENTRY org.eclipse.osgi 4 0 2019-07-17 15:51:31.506
+!MESSAGE Startup error
+!STACK 1
+java.lang.RuntimeException: ReliableFile is corrupt
+	at org.eclipse.osgi.framework.internal.core.Framework.initialize(Framework.java:192)
+	at org.eclipse.osgi.framework.internal.core.Framework.<init>(Framework.java:162)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:261)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:175)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.main(EclipseStarter.java:150)
+Caused by: java.io.IOException: ReliableFile is corrupt
+	at org.eclipse.osgi.framework.internal.reliablefile.ReliableFile.getInputStream(ReliableFile.java:323)
+	at org.eclipse.osgi.framework.internal.reliablefile.ReliableFileInputStream.<init>(ReliableFileInputStream.java:92)
+	at org.eclipse.osgi.framework.internal.reliablefile.ReliableFileInputStream.<init>(ReliableFileInputStream.java:66)
+	at org.eclipse.osgi.storagemanager.StorageManager.updateTable(StorageManager.java:488)
+	at org.eclipse.osgi.storagemanager.StorageManager.open(StorageManager.java:709)
+	at org.eclipse.osgi.internal.baseadaptor.BaseStorage.initFileManager(BaseStorage.java:220)
+	at org.eclipse.osgi.internal.baseadaptor.BaseStorage.initialize(BaseStorage.java:154)
+	at org.eclipse.osgi.baseadaptor.BaseAdaptor.initializeStorage(BaseAdaptor.java:123)
+	at org.eclipse.osgi.framework.internal.core.Framework.initialize(Framework.java:190)
+	... 4 more

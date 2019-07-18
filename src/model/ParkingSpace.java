@@ -55,12 +55,12 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		notifyObserver();
 	} 
 	
-	public int getActualVehicleStorage(){
+	public double getActualVehicleStorage(){
 		return _state.getActualVehicleStorage();
 	}
 	
-	public void updateVehicleStorage(int newStorage){
-		_state.updateVehicleStorage(newStorage);
+	public void updateVehicleStorage(){
+		_state.updateVehicleStorage();
 		notifyObserver();
 	}
 	
@@ -205,8 +205,8 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		public abstract boolean isFree();
 		public abstract StateParkingSpace makeBusy(int actualVehicleStorage);
 		public abstract StateParkingSpace makeFree();
-		public abstract int getActualVehicleStorage();
-		public abstract void updateVehicleStorage(int newStorage);
+		public abstract double getActualVehicleStorage();
+		public abstract void updateVehicleStorage();
 		public abstract LocalDateTime getStartOccupation();
 	}
 	
@@ -228,12 +228,12 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		}
 
 		@Override
-		public int getActualVehicleStorage() {
+		public double getActualVehicleStorage() {
 			throw new UnsupportedOperationException("The parking space is free");
 		}
 
 		@Override
-		public void updateVehicleStorage(int newStorage) {
+		public void updateVehicleStorage() {
 			throw new UnsupportedOperationException("The parking space is free");
 		}
 
@@ -244,10 +244,10 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 	}
 	
 	private class Busy extends StateParkingSpace{
-		private int _actualVehicleStorage;
+		private double _actualVehicleStorage;
 		private LocalDateTime _startDateTime;
 		
-		public Busy(int actualVehicleStorage){
+		public Busy(double actualVehicleStorage){
 			this._actualVehicleStorage = actualVehicleStorage;
 			_startDateTime = Document.GetInstance().getTime();
 		}
@@ -268,13 +268,15 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		}
 		
 		@Override
-		public int getActualVehicleStorage(){
+		public double getActualVehicleStorage(){
 			return _actualVehicleStorage;
 		}
 
 		@Override
-		public void updateVehicleStorage(int newStorage) {
-			this._actualVehicleStorage = newStorage;
+		public void updateVehicleStorage() {
+			double newVehicleStorage = _actualVehicleStorage + (ConstantProject.chargingVehiclesSpeed/60.0);		//KW to Wmin
+			if(newVehicleStorage > ConstantProject.maxChargeVehicleStorage) _actualVehicleStorage = ConstantProject.maxChargeVehicleStorage;
+			else _actualVehicleStorage = newVehicleStorage;
 		}
 
 		@Override
@@ -295,7 +297,7 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 			ris.add(new Triple(nameSpace,screen,Ontology.HasReserving,temp.getTripleSubject(),this.getClass().getName(),temp.getClass().getName()));			
 		}	
 		try{
-			ris.add(new Triple(nameSpace,screen,Ontology.HasVeicleStorage,Integer.toString(this.getActualVehicleStorage()),this.getClass().getName(),Integer.class.getName()));
+			ris.add(new Triple(nameSpace,screen,Ontology.HasVeicleStorage,Double.toString(this.getActualVehicleStorage()),this.getClass().getName(),Integer.class.getName()));
 		}catch(Exception e) {
 			//e
 		}

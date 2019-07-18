@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.sun.javafx.charts.Legend;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
@@ -126,6 +129,12 @@ public class MyControllerMainForm implements Initializable {
 		chartParking.getData().add(series2);
 		chartParking.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: green");
 		chartParking.lookup(".default-color1.chart-bar").setStyle("-fx-bar-fill: red");
+		for(Node n : chartParking.getChildrenUnmodifiable()){
+			   if(n instanceof Legend){
+				   ((Legend)n).getItems().get(0).getSymbol().setStyle("-fx-background-color: #0000ff, green;");
+				   ((Legend)n).getItems().get(1).getSymbol().setStyle("-fx-background-color: #0000ff, red;");
+			   }
+			}
 		IObserver<ParkingSpace> o = ObserverFactory.createObserverChartParking(chartParking);
 		for(ParkingSpace p : Parking.GetInstance().getParkingSpace())
 			p.attachObserver(o);
