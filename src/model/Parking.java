@@ -19,7 +19,7 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 		_observer = new ArrayList<>();
 		NormalParkingSpaceFactory factory = new NormalParkingSpaceFactory();
 		
-		for(int i = 0; i < ConstantProject.numerNormalParkingSpace; i++){
+		for(int i = 0; i < ConstantProject.numberNormalParkingSpace; i++){
 			_parkingSpace.add(factory.CreateParkingSpace(i));
 		}
 		//this.createNewReserving(new RegisteredUser("ciao", "ciao", "pluto"), LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 41)), LocalDateTime.of(LocalDate.now(), LocalTime.of(20, 41)), 30);

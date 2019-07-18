@@ -1,0 +1,570 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#"
+     xml:base="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid">
+        <owl:versionIRI rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid/2.0"/>
+        <rdfs:comment>Questa antologia mira a descrivere un sistema &quot;vehicle to grid&quot;.
+Nello specifico rappresenta un sistema di parcheggi per la ricarica di veicoli elettrici, tramite uno store di energia che a sua volta è ricaricato da pannelli fotovoltaici e dalla rete elettrica.
+Sono presenti degli utenti, che possono effettuare delle prenotazioni per i posti auto.
+Vengono descritte anche le previsioni meteo fino a tre giorni, che influenzano la produzione di energia dei pannelli solari.
+
+Lo scopo è l&apos;analisi del consumo energetico non indipendente, quindi tramite rete eletrica, per supportare la ricarica dei veicoli, al cambiare delle strategie, flusso di veicoli da ricaricare e produzione dei pannelli fotovoltaici.</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasForecast -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasForecast">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SingleForecast"/>
+        <rdfs:comment>Possesso di una previsione meteo (riferita ad una giornata)
+
+Utilizzo:
+SimulationScreen possiede N SingleForecast</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasParking -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasParking">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Parking"/>
+        <rdfs:comment>Possesso di un parcheggio, dove per parcheggio si intende un insieme di posti auto.
+
+Utilizzo:
+SimulationScreen possiede un Parking</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasReservations -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasReservations">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Parking"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving"/>
+        <rdfs:comment>Possedere delle prenotazioni
+
+Utilizzo:
+Parking possiede da 0 a N Reserving</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasStore -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasStore">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Storage"/>
+        <rdfs:comment>Possesso di uno Store
+
+Utilizzo:
+Un SimulationScreen possiede uno Storage</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasUser -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasUser">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#RegisteredUser"/>
+        <rdfs:comment>Possesso, conoscenza di un Utente.
+
+Utilizzo:
+SimulationScreen possiede, da 0 ad N, RegisteredUser</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasWheater -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasWheater">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SingleForecast"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Wheater"/>
+        <rdfs:comment>Possesso di una singola previsione meteo, riferita ad una determinata ora del giorno
+
+Utilizzo:
+SingleForecast possiede 24 wheater</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#isComposed -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#isComposed">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Parking"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#ParkingSpace"/>
+        <rdfs:comment>Il soggetto è composto dall&apos;oggetto per essere tale
+
+Utilizzo:
+Il Parking (insieme di posteggi auto) è composto da N ParkingSpace per poter essere definito un parcheggio.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#isReferedTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#isReferedTo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#ParkingSpace"/>
+        <rdfs:comment>Il soggetto fa riferimento all&apos;oggetto
+
+Utilizzo:
+Reserving fa riferimento ad uno specifico ParkingSpace</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#owner -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#owner">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#RegisteredUser"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving"/>
+        <rdfs:comment>Essere proprietari
+
+Utilizzo:
+Un RegisteredUser pè proprietario di una Reserving</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#actualCharge -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#actualCharge">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Storage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment>Carica attuale dello storage</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#chargingSpeedStorageByEnel -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#chargingSpeedStorageByEnel">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment>è la velocità di ricarica dello storage da parte della rete elettrica
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#chargingVehiclesSpeed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#chargingVehiclesSpeed">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>è la velocità di carica di un veicolo situato in un posto auto (in ricarica).
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#endTimeReserving -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#endTimeReserving">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+        <rdfs:comment>Rappresenta la fine di una prenotazione</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#RegisteredUser"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Possiede una email
+
+Utilizzo:
+RegisteredUser possiede un email</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasId -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasId">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#ParkingSpace"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>Possesso di un&apos;id di riferimento, utilizzato dal simulatore.
+
+Utilizzo:
+1)
+SignleForecast possiede un id.
+Viene assegnato da un BrokerId, che attualmente li genera univocamente solo per la stessa simulazione.
+2)
+ParkingSpace possiede un id.
+In questo caso è un id progressivo, da 0 a numberParkingSpace (il numero di posti auto del parcheggio)
+3)
+Reserving possiede un id.
+Viene assegnato da un BrokerId, che attualmente li genera univocamente solo per la stessa simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasNickname -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasNickname">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#RegisteredUser"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Possesso di un nickname
+
+Utilizzo:
+RegisteredUser possiede un nickname</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasPassword -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasPassword">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#RegisteredUser"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Possesso di una password
+
+Utilizzo:
+RegisteredUser possiede una password</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#inDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#inDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SingleForecast"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>Segnala la data di riferimento o avvenimento o previsione
+
+Utilizzo:
+SignleForecast previsto in data</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#initialChargeStorage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#initialChargeStorage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment>Carica iniziale dello store di energia
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#isBusy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#isBusy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#ParkingSpace"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>Denota se un posto auto del parcheggio è occupato (true)
+oppure libero (false)
+
+utilizzo:
+ParkingSpace isBusy true/false</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#maxChargeStorageCapacity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#maxChargeStorageCapacity">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment>è la capacità massima dello Storage
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#maxChargeVehicleStorage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#maxChargeVehicleStorage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment>è la capacità massima di un veicolo.
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#maxDurationCarPark -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#maxDurationCarPark">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>Tempo massimo per la durata del di un parcheggio (espresso in minuti)
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#maxVehicleCapacityOnArrive -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#maxVehicleCapacityOnArrive">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>è la capacità di carica massima di un veicolo che arriva al parcheggio.
+
+Esempio: se pari a X, verranno simulati come veicolo in arrivo, solo veicoli con al massimo X di carica.
+
+è una costante di simulazione.
+
+#nel simulatore:
+maximumVehicleCapacityWhenArriveToParkingSpace</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#minDurationCarPark -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#minDurationCarPark">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>Tempo minimo per la durata del di un parcheggio (espresso in minuti)
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#minTimeToNowForReserving -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#minTimeToNowForReserving">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>Rappresenta il tempo minimo che deve trascorrere dalla creazione-richiesta di una prenotazione alla prenotazione stessa.
+
+Dato X l&apos;orario attuale, in cui richiedo una prenotazione
+Dato Y l&apos;orario della prenotazione (esempio: tra 4 ore).
+La distanza tra Y ed X (supponendo Y&gt;X) dev eessere di almeno minTImeToNowForReserving.
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#numberParkingSpace -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#numberParkingSpace">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment>Il numero dei posti auto del parcheggio relativo alla simulaizone.
+
+è una costante di simulazione.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#parkingVeicleStorage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#parkingVeicleStorage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#ParkingSpace"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment>Rappresenta la quantità di carica del veicolo posteggiato su un determinato posto auto
+
+Utilizzo:
+ParkingSpace è occupato e il veicolo posteggiato è elettrico e con una carica pari a X</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#startTimeReserving -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#startTimeReserving">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+        <rdfs:comment>Rappresenta l&apos;inizio di una prenotazione</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#timeStamp -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#timeStamp">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+        <rdfs:comment>è il tempo a cui è stato effettuato lo Screen della simulazione: SimulationScreen</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#wheaterAt -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#wheaterAt">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Wheater"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment>Il codominio è di tipo rdfs:Literal perchè non era presente un tipo che rapresentasse l&apos;orario escluso della data.</rdfs:comment>
+        <rdfs:comment>Indica l&apos;orario della previsione
+
+Utilizzo:
+un Wheater è riferito ad un&apos;ora precisa</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#wheaterIs -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#wheaterIs">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Wheater"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>Il codominio è di tipo esd:decimal perchè il simulatore tratta il risultato della previsione con un enumerativo, quindi un decimale è il timpo più prossimo.
+
+0--&gt;sunny
+1--&gt;cloudy
+2--&gt;rain</rdfs:comment>
+        <rdfs:comment>Indica il risultato della previsione metereologica rispetto ad un ora</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Parking -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Parking">
+        <rdfs:comment>Un parcheggio, composto da uno o più posti auto</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#ParkingSpace -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#ParkingSpace">
+        <rdfs:comment>Un singolo posteggio auto</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#RegisteredUser -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#RegisteredUser">
+        <rdfs:comment>Un utente registrato al sistema.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving">
+        <rdfs:comment>Una prenotazone per un singolo posteggio auto, effettuata da un utente registrato al sistema.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SimulationScreen">
+        <rdfs:comment>L&apos;intera rappresentazione di un istante di simulazione.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SingleForecast -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#SingleForecast">
+        <rdfs:comment>Prefisione meteo di un intera giornata.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Storage -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Storage">
+        <rdfs:comment>Lo store di energia, che fa da accumulatore, può riceve energia dalle fonti (pannelli fotovoltaici e rete elettrica), più fornire energia ai parcheggi per la ricarica dei veicoli.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Wheater -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Wheater">
+        <rdfs:comment>Previsione meteo riferita ad una precisa ora del giorno.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#WheaterForecast -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#WheaterForecast">
+        <rdfs:comment>Previsioni meteo riferite ai prossimi tre giorni.
+
+
+----UPDATE
+non viene utilizzato in quanto di fatto è solo un contenitore.</rdfs:comment>
+        <owl:deprecated></owl:deprecated>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

@@ -13,7 +13,7 @@ public class Reserving implements Comparable<Reserving>{
 	private RegisteredUser user;
 	private LocalDateTime startTimeReserving;
 	private LocalDateTime endTimeReserving;
-	private int minCharge;
+	private int minCharge;//deprecato
 	private ParkingSpace parkingSpace;
 	private int id;
 	

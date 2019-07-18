@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ConstantProject {
 	//constant for parking
-	public static final int numerNormalParkingSpace = 10;
+	public static final int numberNormalParkingSpace = 10;
 	public static final int minTimeToNowForReserving = 30;		//minutes
 	public static final int minDurationCarPark = 60;			//minutes
 	public static final int maxDurationCarPark = 480;			//minutes
