@@ -537,16 +537,32 @@ un Wheater è riferito ad un&apos;ora precisa</rdfs:comment>
     
 
 
-    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#WheaterForecast -->
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#WheaterForecast">
-        <rdfs:comment>Previsioni meteo riferite ai prossimi tre giorni.
+    
 
 
-----UPDATE
-non viene utilizzato in quanto di fatto è solo un contenitore.</rdfs:comment>
-        <owl:deprecated></owl:deprecated>
-    </owl:Class>
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#cloudy -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#cloudy"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#rain -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#rain"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#sunny -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#sunny"/>
     
 
 
