@@ -1,9 +1,11 @@
-package persistence;
+package persistence.sib;
 
 import java.util.Vector;
 
 public class Triple {
 
+	public static String SEPARATOR = "#";
+	
 	//----------------------------------Triple
 	private String _nameSpace;
 	private String _subject;
@@ -12,11 +14,13 @@ public class Triple {
 	private String _subjectType;
 	private String _objectType;
 	
+	
+	
 	public Triple(String _nameSpace, String _subject, String _predicate, String _object, String _subjectType,String _objectType) {
-		this._nameSpace = _nameSpace.replaceAll("#", "")+"#";
-		this._subject = _subject.replaceAll("#", "");
-		this._predicate = _predicate.replaceAll("#", "");
-		this._object = _object.replaceAll("#", "");
+		this._nameSpace = _nameSpace.replaceAll(SEPARATOR, "")+SEPARATOR;
+		this._subject = _subject.replaceAll(SEPARATOR, "");
+		this._predicate = _predicate.replaceAll(SEPARATOR, "");
+		this._object = _object.replaceAll(SEPARATOR, "");
 		this._subjectType = _subjectType;
 		this._objectType = _objectType;
 	}
@@ -67,17 +71,17 @@ public class Triple {
 		triple.add(_objectType);
 		return triple;
 	}
-	/*
 	@Override
 	public String toString() {
 		return "<"+_nameSpace+_subject+":"+_subjectType+"><"+_nameSpace+_predicate+"><"+_nameSpace+_object+":"+_objectType+">";		
 		
 	}
-	*/
+	/*
 	@Override
 	public String toString() {
 		return "<"+_nameSpace+_subject+"><"+_nameSpace+_predicate+"><"+_nameSpace+_object+">";		
 		
 	}
+	*/
 	
 }

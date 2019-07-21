@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import persistence.Ontology;
-import persistence.Triple;
+import persistence.sib.Ontology;
+import persistence.sib.Triple;
 import utils.BrokerId;
 import utils.Utilities;
 

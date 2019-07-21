@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import persistence.Triple;
+import persistence.sib.Triple;
 import presentation.IObserver;
 
 public class ContainerEvent implements ISubject<Log>{

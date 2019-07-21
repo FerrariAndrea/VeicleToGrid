@@ -3,9 +3,9 @@ package utils;
 import java.util.Iterator;
 
 import model.Document;
-import persistence.KPConnector;
-import persistence.Ontology;
-import persistence.Triple;
+import persistence.sib.KPConnector;
+import persistence.sib.Ontology;
+import persistence.sib.Triple;
 
 public class BrokerId {
 

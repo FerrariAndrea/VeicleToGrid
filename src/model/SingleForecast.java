@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import persistence.Ontology;
-import persistence.Triple;
+import persistence.sib.Ontology;
+import persistence.sib.Triple;
 import utils.BrokerId;
 import utils.Utilities;
 

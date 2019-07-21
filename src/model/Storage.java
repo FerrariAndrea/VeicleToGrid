@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import persistence.Ontology;
-import persistence.Triple;
+import persistence.sib.Ontology;
+import persistence.sib.Triple;
 import presentation.IObserver;
 
 public class Storage implements ISubject<Storage>{

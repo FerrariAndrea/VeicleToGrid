@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import persistence.Triple;
+
+import persistence.sib.Triple;
 import presentation.IObserver;
 
 public class WheaterForecast implements ISubject<SingleForecast>{

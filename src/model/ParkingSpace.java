@@ -13,8 +13,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javafx.scene.paint.Color;
-import persistence.Ontology;
-import persistence.Triple;
+import persistence.sib.Ontology;
+import persistence.sib.Triple;
 import presentation.IObserver;
 
 public abstract class ParkingSpace implements ISubject<ParkingSpace>{

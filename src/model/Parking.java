@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import persistence.Triple;
+import persistence.sib.Triple;
 import presentation.IObserver;
 
 public class Parking implements ISubject<ArrayList<Reserving>>{
