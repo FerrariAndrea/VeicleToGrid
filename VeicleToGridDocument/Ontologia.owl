@@ -1,20 +1,49 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#"
      xml:base="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:vtg="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid">
         <owl:versionIRI rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid/2.0"/>
+        <dc:creator>https://github.com/FerrariAndrea
+https://github.com/kevin1795</dc:creator>
+        <dc:rights>https://www.gnu.org/licenses/gpl-3.0.en.html</dc:rights>
         <rdfs:comment>Questa antologia mira a descrivere un sistema &quot;vehicle to grid&quot;.
 Nello specifico rappresenta un sistema di parcheggi per la ricarica di veicoli elettrici, tramite uno store di energia che a sua volta è ricaricato da pannelli fotovoltaici e dalla rete elettrica.
 Sono presenti degli utenti, che possono effettuare delle prenotazioni per i posti auto.
 Vengono descritte anche le previsioni meteo fino a tre giorni, che influenzano la produzione di energia dei pannelli solari.
 
 Lo scopo è l&apos;analisi del consumo energetico non indipendente, quindi tramite rete eletrica, per supportare la ricarica dei veicoli, al cambiare delle strategie, flusso di veicoli da ricaricare e produzione dei pannelli fotovoltaici.</rdfs:comment>
+        <rdfs:seeAlso>https://github.com/FerrariAndrea/VeicleToGrid</rdfs:seeAlso>
     </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/rights -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/rights"/>
     
 
 
