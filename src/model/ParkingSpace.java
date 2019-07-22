@@ -286,9 +286,12 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		
 	
 	}
-	public List<Triple> toTriple(String nameSpace, String timestamp){
+	public List<Triple> toTriple(String parent,String predicateOfParent){
 		List<Triple> ris = new ArrayList<Triple>();
-		String screen = getTripleScreenSubject(timestamp);
+		String s = Ontology.APP_NS+ getTripleSubject();		
+		ris.add(new Triple(parent,predicateOfParent,s));
+		
+		
 		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasScreen,screen,this.getClass().getName(),this.getClass().getName()));
 		ris.add(new Triple(nameSpace,screen,Ontology.Is,Boolean.toString(this.isFree()),this.getClass().getName(),Boolean.class.getName()));
 		for (Iterator<Reserving> i = this._reserving.iterator(); i.hasNext();) {	
@@ -303,10 +306,8 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		}
 		return ris;
 	}
+	
 	public String getTripleSubject(){
 		return "ParkingSpace_"+this._ID;
-	}
-	public String getTripleScreenSubject(String timestamp){
-		return getTripleSubject()+"_"+timestamp;
 	}
 }

@@ -136,7 +136,7 @@ public class Document implements ISubject<LocalDateTime>{
 		*/
 	}
 	
-	public List<Triple> toTriple(String app_ns){
+	public List<Triple> toTriple(){
 		String s = Ontology.APP_NS+ "SimulationScreenInstance";
 		List<Triple> ris = new ArrayList<Triple>();
 		ris.add(new Triple(s,Ontology.rdf_type,Ontology.vtg_SimulationScreen));
@@ -144,8 +144,7 @@ public class Document implements ISubject<LocalDateTime>{
 		ris.add(new Triple(s,Ontology.vtg_chargingVehiclesSpeed,ConstantProject.chargingVehiclesSpeed+""));
 		ris.add(new Triple(s,Ontology.vtg_initialChargteStorage,ConstantProject.InitialChargeStorage+""));
 		ris.add(new Triple(s,Ontology.vtg_maxChargeStorageCapacity,ConstantProject.maxChargeStorageCapacity+""));
-		ris.add(new Triple(s,Ontology.vtg_maxChargeVehicleStorage,ConstantProject.maxChargeVehicleStorage+""));
-		
+		ris.add(new Triple(s,Ontology.vtg_maxChargeVehicleStorage,ConstantProject.maxChargeVehicleStorage+""));		
 		ris.add(new Triple(s,Ontology.maxDurationCarPark,ConstantProject.maxDurationCarPark+""));
 		ris.add(new Triple(s,Ontology.vtg_minDurationCarPark,ConstantProject.minDurationCarPark+""));
 		ris.add(new Triple(s,Ontology.vtg_maxVehicleCapacityOnArrive,ConstantProject.maximumVehicleCapacityWhenArriveToParkingSpace+""));
@@ -153,9 +152,12 @@ public class Document implements ISubject<LocalDateTime>{
 		ris.add(new Triple(s,Ontology.vtg_numberParkingSpace,ConstantProject.numberNormalParkingSpace+""));
 		ris.add(new Triple(s,Ontology.vtg_timeStamp, Utilities.getTimeStamp(getTime())));
 		
+		ris.addAll(WheaterForecast.GetInstance().toTriple(s, Ontology.vtg_hasForecast));
 		
-		//public static String vtg_hasForecast ="vtg:hasForecast"; //---------da fare
-		//public static String vtg_hasParking ="vtg:hasParking";//---------da fare
+		ris.addAll(Parking.GetInstance().toTriple(s, Ontology.vtg_hasParking));
+		
+		
+		
 		//public static String vtg_hasStore ="vtg:hasStore";//---------da fare
 		//public static String vtg_hasUser ="vtg:hasUser";//---------da fare
 

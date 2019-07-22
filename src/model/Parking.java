@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import persistence.sib.Ontology;
 import persistence.sib.Triple;
 import presentation.IObserver;
 
@@ -129,11 +130,15 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 	}
 	
 
-	public List<Triple> toTriple(String nameSpace,String timesamp){
+	public List<Triple> toTriple(String parent,String predicateOfParent){
+		String s = Ontology.APP_NS+"Parking1";
 		List<Triple> ris = new ArrayList<Triple>();
+		ris.add(new Triple(parent,predicateOfParent,s));
+		
 		for (Iterator<ParkingSpace> i = _parkingSpace.iterator(); i.hasNext();) {			
-			ris.addAll(i.next().toTriple(nameSpace,timesamp));
+			ris.addAll(i.next().toTriple(s,Ontology.vtg_isComposed));
 		}
+		// hasReservations da fare
 		return ris;
 	}
 }

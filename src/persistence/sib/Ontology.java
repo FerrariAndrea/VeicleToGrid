@@ -18,8 +18,8 @@ public class Ontology {
 	public static String vtg_SimulationScreen ="vtg:SimulationScreen";
 	public static String vtg_chargingSpeedStorageByEnel ="vtg:chargingSpeedStorageByEnel";
 	public static String vtg_chargingVehiclesSpeed ="vtg:chargingVehiclesSpeed";
-	public static String vtg_hasForecast ="vtg:hasForecast"; //---------da fare
-	public static String vtg_hasParking ="vtg:hasParking";//---------da fare
+	public static String vtg_hasForecast ="vtg:hasForecast"; 
+	public static String vtg_hasParking ="vtg:hasParking";
 	public static String vtg_hasStore ="vtg:hasStore";//---------da fare
 	public static String vtg_hasUser ="vtg:hasUser";//---------da fare
 	public static String vtg_initialChargteStorage ="vtg:initialChargteStorage";
@@ -31,6 +31,14 @@ public class Ontology {
 	public static String vtg_minTimeToNowForReserving ="vtg:minTimeToNowForReserving";
 	public static String vtg_numberParkingSpace ="vtg:numberParkingSpace";
 	public static String vtg_timeStamp ="vtg:timeStamp";
+	public static String vtg_hasWheater ="vtg:hasWheater";
+	public static String vtg_inDate ="vtg:inDate";
+	public static String vtg_wheaterAt ="vtg:wheaterAt";
+	public static String vtg_wheaterIs ="vtg:wheaterIs";
+	public static String vtg_hasReservations ="vtg:hasReservations";//---------da fare
+	public static String vtg_isComposed ="vtg:isComposed";//---------da fare
+	
+	
 	//--------------------------------------------------ALTRE ONTOLOGIE
 	public static String rdf_type ="rdf:type";
 	

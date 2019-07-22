@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import persistence.sib.Ontology;
 import persistence.sib.Triple;
 import presentation.IObserver;
 
@@ -74,10 +75,16 @@ public class WheaterForecast implements ISubject<SingleForecast>{
 	}
 	
 	
-	public List<Triple> toTriple(String nameSpace,String timestamp){
+	public List<Triple> toTriple(String parent,String predicateOfParent){
+	
+		
 		List<Triple> ris = new ArrayList<Triple>();
+		int counter = 0;
 		for (Iterator<SingleForecast> i = this._queue.iterator(); i.hasNext();) {	
-			ris.addAll(i.next().toTriple(nameSpace,timestamp));
+			String s = Ontology.APP_NS+ "SF_"+counter;
+			counter++;
+			ris.add(new Triple(parent,predicateOfParent,s));
+			ris.addAll(i.next().toTriple(s));
 		}		
 		return ris;
 	}

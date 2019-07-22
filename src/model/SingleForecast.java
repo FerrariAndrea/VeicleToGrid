@@ -85,26 +85,21 @@ public class SingleForecast {
 		
 	}
 	
-	public List<Triple> toTriple(String nameSpace,String timestamp){
+	public List<Triple> toTriple(String s){
 		List<Triple> ris = new ArrayList<Triple>();
-		String screen = getTripleScreenSubject(timestamp);
-		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasScreen,screen,this.getClass().getName(),this.getClass().getName()));
-		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasDate,Utilities.getTimeStamp(this._date),this.getClass().getName(),this._date.getClass().getName()));
+		
+		ris.add(new Triple(s,Ontology.vtg_inDate,Utilities.getTimeStamp(this._date)));	
+		
+		int counter =0;
 		for (Iterator<TimeSlot> i = _map.keySet().iterator(); i.hasNext();) {	
+			String s2 = Ontology.APP_NS+"Wheater_"+counter;
+			counter++;
+			ris.add(new Triple(s,Ontology.vtg_hasWheater,s2));			
 			TimeSlot temp =i.next();
-			ris.add(new Triple(nameSpace,screen,Ontology.HasWheater,getTripleWheaterSubject(temp,timestamp),this.getClass().getName(),temp.getClass().getName()));
-			ris.add(new Triple(nameSpace,getTripleWheaterSubject(temp,timestamp),Ontology.At,_map.get(temp).toString(),temp.getClass().getName(),temp.getClass().getName()));
-			ris.add(new Triple(nameSpace,getTripleWheaterSubject(temp,timestamp),Ontology.Is,_map.get(temp).toString(),temp.getClass().getName(),_map.get(temp).getClass().getName()));
+			ris.add(new Triple(s2,Ontology.vtg_wheaterAt,Utilities.getTimeStamp(temp._start)));			
+			ris.add(new Triple(s2,Ontology.vtg_wheaterIs,_map.get(temp).toString()));			
 		}		
 		return ris;
 	}
-	public String getTripleSubject(){
-		return "Forecast_" + this._id;
-	}
-	public String getTripleScreenSubject(String timestamp){
-		return getTripleSubject()+"_"+timestamp;
-	}
-	public String getTripleWheaterSubject(TimeSlot ts ,String timestamp) {
-		return getTripleScreenSubject(timestamp)+"_"+Utilities.getTimeStamp(ts.getStartTime());
-	}
+	
 }
