@@ -87,7 +87,7 @@ SimulationScreen possiede un Parking</rdfs:comment>
     <!-- http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasReservations -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasReservations">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Parking"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#ParkingSpace"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Reserving"/>
         <rdfs:comment>Possedere delle prenotazioni
 

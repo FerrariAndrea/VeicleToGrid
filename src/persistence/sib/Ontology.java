@@ -36,8 +36,10 @@ public class Ontology {
 	public static String vtg_wheaterAt ="vtg:wheaterAt";
 	public static String vtg_wheaterIs ="vtg:wheaterIs";
 	public static String vtg_hasReservations ="vtg:hasReservations";//---------da fare
-	public static String vtg_isComposed ="vtg:isComposed";//---------da fare
-	
+	public static String vtg_isComposed ="vtg:isComposed";
+	public static String vtg_hasId ="vtg:hasId";
+	public static String vtg_isBusy ="vtg:isBusy";
+	public static String vtg_parkingVeicleStorage ="vtg:parkingVeicleStorage";
 	
 	//--------------------------------------------------ALTRE ONTOLOGIE
 	public static String rdf_type ="rdf:type";

@@ -291,6 +291,13 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		String s = Ontology.APP_NS+ getTripleSubject();		
 		ris.add(new Triple(parent,predicateOfParent,s));
 		
+		ris.add(new Triple(s,Ontology.vtg_hasId,this._ID+""));
+		ris.add(new Triple(s,Ontology.vtg_isBusy,Boolean.toString(!this.isFree())));
+		ris.add(new Triple(s,Ontology.vtg_parkingVeicleStorage,Double.toString(this.getActualVehicleStorage())));
+		
+		public static String vtg_hasId ="vtg:hasId";
+		public static String vtg_isBusy ="vtg:isBusy";
+		public static String vtg_parkingVeicleStorage ="vtg:parkingVeicleStorage";
 		
 		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasScreen,screen,this.getClass().getName(),this.getClass().getName()));
 		ris.add(new Triple(nameSpace,screen,Ontology.Is,Boolean.toString(this.isFree()),this.getClass().getName(),Boolean.class.getName()));
