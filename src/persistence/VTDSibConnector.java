@@ -17,7 +17,7 @@ public class VTDSibConnector {
 	private static int  MAX_RATE =150;//triple alla volta 
 	private static boolean USE_SIB = true;
 	private static boolean USE_FILE = true;
-	private static String APP_NS = "http://veicletogridsimulator/";
+	
 	
 	
 	public static void saveSnap() throws Exception {

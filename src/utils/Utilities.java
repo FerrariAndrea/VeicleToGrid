@@ -8,9 +8,8 @@ import java.time.ZoneId;
 public class Utilities {
 
 	
-	public static String getTimeStamp(LocalDateTime d) {
-	
-		return Long.toString(d.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+	public static String getTimeStamp(LocalDateTime d) {		
+		return d.toString();//Long.toString(d.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
 	}
 	
 	public static String getTimeStamp(LocalDate d,LocalTime t) {
@@ -18,9 +17,9 @@ public class Utilities {
 		return getTimeStamp(temp);
 	}
 	public static String getTimeStamp(LocalDate d) {
-		return  Long.toString(d.toEpochDay());
+		return  getTimeStamp(d);
 	}
 	public static String getTimeStamp(LocalTime t) {
-		return Long.toString(t.toSecondOfDay());
+		return  getTimeStamp(t);
 	}
 }

@@ -3,9 +3,13 @@ package model;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 
 import persistence.VTDSibConnector;
+import persistence.sib.Ontology;
+import persistence.sib.Triple;
 import presentation.IObserver;
+import utils.Utilities;
 
 public class Document implements ISubject<LocalDateTime>{
 	private ArrayList<RegisteredUser> _registeredUser;
@@ -130,6 +134,34 @@ public class Document implements ISubject<LocalDateTime>{
 			e.printStackTrace();
 		}
 		*/
+	}
+	
+	public List<Triple> toTriple(String app_ns){
+		String s = Ontology.APP_NS+ "SimulationScreenInstance";
+		List<Triple> ris = new ArrayList<Triple>();
+		ris.add(new Triple(s,Ontology.rdf_type,Ontology.vtg_SimulationScreen));
+		ris.add(new Triple(s,Ontology.vtg_chargingSpeedStorageByEnel,ConstantProject.chargingSpeedStorageByEnel+""));
+		ris.add(new Triple(s,Ontology.vtg_chargingVehiclesSpeed,ConstantProject.chargingVehiclesSpeed+""));
+		ris.add(new Triple(s,Ontology.vtg_initialChargteStorage,ConstantProject.InitialChargeStorage+""));
+		ris.add(new Triple(s,Ontology.vtg_maxChargeStorageCapacity,ConstantProject.maxChargeStorageCapacity+""));
+		ris.add(new Triple(s,Ontology.vtg_maxChargeVehicleStorage,ConstantProject.maxChargeVehicleStorage+""));
+		
+		ris.add(new Triple(s,Ontology.maxDurationCarPark,ConstantProject.maxDurationCarPark+""));
+		ris.add(new Triple(s,Ontology.vtg_minDurationCarPark,ConstantProject.minDurationCarPark+""));
+		ris.add(new Triple(s,Ontology.vtg_maxVehicleCapacityOnArrive,ConstantProject.maximumVehicleCapacityWhenArriveToParkingSpace+""));
+		ris.add(new Triple(s,Ontology.vtg_minTimeToNowForReserving,ConstantProject.minTimeToNowForReserving+""));
+		ris.add(new Triple(s,Ontology.vtg_numberParkingSpace,ConstantProject.numberNormalParkingSpace+""));
+		ris.add(new Triple(s,Ontology.vtg_timeStamp, Utilities.getTimeStamp(getTime())));
+		
+		
+		//public static String vtg_hasForecast ="vtg:hasForecast"; //---------da fare
+		//public static String vtg_hasParking ="vtg:hasParking";//---------da fare
+		//public static String vtg_hasStore ="vtg:hasStore";//---------da fare
+		//public static String vtg_hasUser ="vtg:hasUser";//---------da fare
+
+	
+		
+		return ris;
 	}
 	
 	
