@@ -57,7 +57,6 @@ public class RegisteredUser {
 		ris.add(new Triple(s,Ontology.vtg_Password,this._password));
 		ris.add(new Triple(s,Ontology.vtg_hasEmail,this._email));
 		
-		
 		return ris;
 	}
 	public String getTripleSubject(){

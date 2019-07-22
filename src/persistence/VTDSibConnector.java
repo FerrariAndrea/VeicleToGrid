@@ -1,16 +1,11 @@
 package persistence;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+	
 import model.Document;
-import model.Parking;
-import model.Storage;
-import model.WheaterForecast;
 import persistence.sib.KPConnector;
 import persistence.sib.Triple;
-import utils.Utilities;
 
 public class VTDSibConnector {
 
@@ -22,15 +17,14 @@ public class VTDSibConnector {
 	
 	public static void saveSnap() throws Exception {
 		KPConnector.GetInstance().join();
-		String nameSpace = APP_NS+Triple.SEPARATOR;
-		String timestamp = Utilities.getTimeStamp(Document.GetInstance().getTime());
-		List<Triple> triples = new ArrayList<Triple>();
+
+		List<Triple> triples = Document.GetInstance().toTriple();
+		if(USE_SIB) {
+			KPConnector.GetInstance().insert(triples,MAX_RATE);
+		}
+		if(USE_FILE) {
 		
-		triples.addAll(Parking.GetInstance().toTriple(nameSpace,timestamp));
-		triples.addAll(WheaterForecast.GetInstance().toTriple(nameSpace,timestamp));
-		triples.addAll(Storage.GetInstance().toTriple(nameSpace,timestamp));
-		
-		KPConnector.GetInstance().insert(triples,MAX_RATE);
+		}
 	}
 	
 	public static List<Triple> getSnap() throws Exception{
@@ -47,7 +41,7 @@ public class VTDSibConnector {
 	public static void main(String[] args)
 	{
 		System.out.println("Output SIB:");
-		try {
+		try {			
 			stampSnap();
 		} catch (Exception e) {
 			e.printStackTrace();
