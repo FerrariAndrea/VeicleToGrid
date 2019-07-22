@@ -138,7 +138,6 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 		for (Iterator<ParkingSpace> i = _parkingSpace.iterator(); i.hasNext();) {			
 			ris.addAll(i.next().toTriple(s,Ontology.vtg_isComposed));
 		}
-		// hasReservations da fare
 		return ris;
 	}
 }

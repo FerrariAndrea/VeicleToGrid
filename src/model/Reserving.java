@@ -56,21 +56,20 @@ public class Reserving implements Comparable<Reserving>{
 		return startTimeReserving.compareTo(o.getStartTimeReserving());
 	}
 	
-	public List<Triple> toTriple(String nameSpace,String timestamp){
-		String screen = this.getTripleScreenSubject(timestamp);
+	public List<Triple> toTriple(String parent,String predicateOfParent){
 		List<Triple> ris = new ArrayList<Triple>();
-		ris.add(new Triple(nameSpace,getTripleSubject(),Ontology.HasScreen,screen,this.getClass().getName(),this.getClass().getName()));
-		ris.add(new Triple(nameSpace,screen,Ontology.HasUser,this.user.getNickname(),this.getClass().getName(),String.class.getName()));
-		ris.add(new Triple(nameSpace,screen,Ontology.StartTime,Utilities.getTimeStamp(this.startTimeReserving),this.getClass().getName(),this.startTimeReserving.getClass().getName()));
-		ris.add(new Triple(nameSpace,screen,Ontology.EndTime,Utilities.getTimeStamp(this.endTimeReserving),this.getClass().getName(),this.endTimeReserving.getClass().getName()));
-		ris.add(new Triple(nameSpace,screen,Ontology.MinCharge,Integer.toString(minCharge),this.getClass().getName(),Integer.class.getName()));
-		//ris.addAll(this.parkingSpace.toTriple(nameSpace)); RIDONDANTE
+		String s = Ontology.APP_NS+ getTripleSubject();
+		ris.add(new Triple(parent,predicateOfParent,s));
+		
+		ris.add(new Triple(s,Ontology.vtg_startTimeReserving,Utilities.getTimeStamp(this.startTimeReserving)));
+		ris.add(new Triple(s,Ontology.vtg_endTimeReserving,Utilities.getTimeStamp(this.endTimeReserving)));
+		ris.add(new Triple(s,Ontology.vtg_owner,user.getTripleSubject()));
+		ris.add(new Triple(s,Ontology.vtg_isReferedTo,parkingSpace.getTripleSubject()));
+		
+		
 		return ris;
 	}
 	public String getTripleSubject(){
 		return "Reserving_" + this.id;
-	}
-	public String getTripleScreenSubject(String timestamp){
-		return getTripleSubject()+"_"+timestamp;
 	}
 }

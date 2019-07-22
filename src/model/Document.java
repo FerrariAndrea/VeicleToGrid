@@ -3,8 +3,10 @@ package model;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import model.SingleForecast.TimeSlot;
 import persistence.VTDSibConnector;
 import persistence.sib.Ontology;
 import persistence.sib.Triple;
@@ -156,10 +158,14 @@ public class Document implements ISubject<LocalDateTime>{
 		
 		ris.addAll(Parking.GetInstance().toTriple(s, Ontology.vtg_hasParking));
 		
+		ris.addAll(Storage.GetInstance().toTriple(s, Ontology.vtg_hasStore));
 		
 		
-		//public static String vtg_hasStore ="vtg:hasStore";//---------da fare
-		//public static String vtg_hasUser ="vtg:hasUser";//---------da fare
+		for (Iterator<RegisteredUser> i = _registeredUser.iterator(); i.hasNext();) {	
+			
+			ris.addAll(i.next().toTriple(s, Ontology.vtg_hasUser));
+			
+		}
 
 	
 		

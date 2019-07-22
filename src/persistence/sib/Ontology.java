@@ -35,11 +35,20 @@ public class Ontology {
 	public static String vtg_inDate ="vtg:inDate";
 	public static String vtg_wheaterAt ="vtg:wheaterAt";
 	public static String vtg_wheaterIs ="vtg:wheaterIs";
-	public static String vtg_hasReservations ="vtg:hasReservations";//---------da fare
+	public static String vtg_hasReservations ="vtg:hasReservations";
 	public static String vtg_isComposed ="vtg:isComposed";
 	public static String vtg_hasId ="vtg:hasId";
 	public static String vtg_isBusy ="vtg:isBusy";
 	public static String vtg_parkingVeicleStorage ="vtg:parkingVeicleStorage";
+	public static String vtg_startTimeReserving ="vtg:startTimeReserving";
+	public static String vtg_endTimeReserving ="vtg:endTimeReserving";
+	public static String vtg_isReferedTo ="vtg:isReferedTo";
+	public static String vtg_owner ="vtg:owner";
+	public static String vtg_actualCharge ="vtg:actualCharge";
+	public static String vtg_hasEmail ="vtg:hasEmail";
+	public static String vtg_Nickname ="vtg:hasNickname";
+	public static String vtg_Password ="vtg:hasPassword";
+	
 	
 	//--------------------------------------------------ALTRE ONTOLOGIE
 	public static String rdf_type ="rdf:type";

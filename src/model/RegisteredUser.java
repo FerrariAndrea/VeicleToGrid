@@ -1,5 +1,12 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import persistence.sib.Ontology;
+import persistence.sib.Triple;
+import utils.Utilities;
+
 public class RegisteredUser {
 	private String _email;
 	private String _password;
@@ -40,5 +47,20 @@ public class RegisteredUser {
 	@Override
 	public String toString(){
 		return this._nickname;			
+	}
+	public List<Triple> toTriple(String parent,String predicateOfParent){
+		List<Triple> ris = new ArrayList<Triple>();
+		String s = Ontology.APP_NS+ getTripleSubject();
+		ris.add(new Triple(parent,predicateOfParent,s));
+		
+		ris.add(new Triple(s,Ontology.vtg_Nickname,this._nickname));
+		ris.add(new Triple(s,Ontology.vtg_Password,this._password));
+		ris.add(new Triple(s,Ontology.vtg_hasEmail,this._email));
+		
+		
+		return ris;
+	}
+	public String getTripleSubject(){
+		return "User_"+this._nickname;
 	}
 }
