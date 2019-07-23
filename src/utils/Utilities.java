@@ -17,9 +17,9 @@ public class Utilities {
 		return getTimeStamp(temp);
 	}
 	public static String getTimeStamp(LocalDate d) {
-		return  getTimeStamp(d);
+		return  getTimeStamp(d,LocalTime.MIDNIGHT);
 	}
 	public static String getTimeStamp(LocalTime t) {
-		return  getTimeStamp(t);
+		return  t.toString();
 	}
 }

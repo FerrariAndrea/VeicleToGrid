@@ -9,6 +9,7 @@ public class Ontology {
 	public static String RESOURCE = "resource";
 	public static String BLANKNODE = "blanknode";
 	public static String LITERAL = "literal";
+	public static String NUMBER = "number";
 	public static String UNKNOW = "";
 	public static String SEPARATOR_URI = "#";
 	public static String SEPARATOR_PREFIX = ":";

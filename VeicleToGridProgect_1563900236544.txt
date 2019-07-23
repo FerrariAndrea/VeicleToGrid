@@ -1,0 +1,171 @@
+<http#//veicletogridsimulator/#SimulationScreenInstance> rdf:type .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:chargingSpeedStorageByEnel "3.0" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:chargingVehiclesSpeed "20" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:initialChargteStorage "600.0" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:maxChargeStorageCapacity "600.0" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:maxChargeVehicleStorage "80" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:maxDurationCarPark "480" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:minDurationCarPark "60" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:maxVehicleCapacityOnArrive "60" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:minTimeToNowForReserving "30" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:numberParkingSpace "10" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:timeStamp .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:hasForecast .
+<http#//veicletogridsimulator/#SF_0> vtg:inDate .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_0> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_0> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_1> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_1> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_2> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_2> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_3> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_3> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_4> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_4> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_5> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_5> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_6> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_6> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_7> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_7> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_8> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_8> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_9> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_9> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_10> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_10> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_0> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_11> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_11> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:hasForecast .
+<http#//veicletogridsimulator/#SF_1> vtg:inDate .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_0> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_0> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_1> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_1> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_2> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_2> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_3> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_3> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_4> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_4> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_5> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_5> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_6> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_6> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_7> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_7> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_8> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_8> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_9> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_9> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_10> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_10> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_1> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_11> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_11> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:hasForecast .
+<http#//veicletogridsimulator/#SF_2> vtg:inDate .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_0> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_0> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_1> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_1> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_2> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_2> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_3> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_3> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_4> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_4> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_5> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_5> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_6> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_6> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_7> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_7> vtg:wheaterIs "sunny" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_8> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_8> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_9> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_9> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_10> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_10> vtg:wheaterIs "rain" .
+<http#//veicletogridsimulator/#SF_2> vtg:hasWheater .
+<http#//veicletogridsimulator/#Wheater_11> vtg:wheaterAt .
+<http#//veicletogridsimulator/#Wheater_11> vtg:wheaterIs "cloudy" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:hasParking .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_0> vtg:hasId "0" .
+<http#//veicletogridsimulator/#ParkingSpace_0> vtg:isBusy "true" .
+<http#//veicletogridsimulator/#ParkingSpace_0> vtg:parkingVeicleStorage "38.0" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_1> vtg:hasId "1" .
+<http#//veicletogridsimulator/#ParkingSpace_1> vtg:isBusy "true" .
+<http#//veicletogridsimulator/#ParkingSpace_1> vtg:parkingVeicleStorage "14.666666666666675" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_2> vtg:hasId "2" .
+<http#//veicletogridsimulator/#ParkingSpace_2> vtg:isBusy "true" .
+<http#//veicletogridsimulator/#ParkingSpace_2> vtg:parkingVeicleStorage "41.0" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_3> vtg:hasId "3" .
+<http#//veicletogridsimulator/#ParkingSpace_3> vtg:isBusy "true" .
+<http#//veicletogridsimulator/#ParkingSpace_3> vtg:parkingVeicleStorage "57.0" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_4> vtg:hasId "4" .
+<http#//veicletogridsimulator/#ParkingSpace_4> vtg:isBusy "true" .
+<http#//veicletogridsimulator/#ParkingSpace_4> vtg:parkingVeicleStorage "11.0" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_5> vtg:hasId "5" .
+<http#//veicletogridsimulator/#ParkingSpace_5> vtg:isBusy "true" .
+<http#//veicletogridsimulator/#ParkingSpace_5> vtg:parkingVeicleStorage "49.0" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_6> vtg:hasId "6" .
+<http#//veicletogridsimulator/#ParkingSpace_6> vtg:isBusy "true" .
+<http#//veicletogridsimulator/#ParkingSpace_6> vtg:parkingVeicleStorage "9.0" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_7> vtg:hasId "7" .
+<http#//veicletogridsimulator/#ParkingSpace_7> vtg:isBusy "true" .
+<http#//veicletogridsimulator/#ParkingSpace_7> vtg:parkingVeicleStorage "27.0" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_8> vtg:hasId "8" .
+<http#//veicletogridsimulator/#ParkingSpace_8> vtg:isBusy "false" .
+<http#//veicletogridsimulator/#Parking1> vtg:isComposed .
+<http#//veicletogridsimulator/#ParkingSpace_9> vtg:hasId "9" .
+<http#//veicletogridsimulator/#ParkingSpace_9> vtg:isBusy "false" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:hasStore .
+<http#//veicletogridsimulator/#BuildingBattery> vtg:actualCharge "77.26666666666723" .
+<http#//veicletogridsimulator/#SimulationScreenInstance> vtg:hasUser .
+<http#//veicletogridsimulator/#User_pluto> vtg:hasNickname "pluto" .
+<http#//veicletogridsimulator/#User_pluto> vtg:hasPassword "ciao" .
+<http#//veicletogridsimulator/#User_pluto> vtg:hasEmail "ciao" .

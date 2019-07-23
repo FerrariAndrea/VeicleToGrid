@@ -35,9 +35,7 @@ public class Triple {
 			this._nameSpace = _nameSpace;
 		}
 	*/
-	public String get_subject() {
-		return _subject;
-	}
+
 	public Triple(String _subjectPrefix,String _subject,String _predicatePrefix, String _predicate, String _objectPrefix, String _object, String _subjectType, String _objectType
 			 ) {
 	
@@ -93,6 +91,9 @@ public class Triple {
 		this._predicateNS = _predicatePrefix;
 		this._objectNS = _objectPrefix;
 	}
+	public String get_subject() {
+		return _subject;
+	}
 	public void set_subject(String _subject) {
 		this._subject = _subject;
 	}
@@ -120,7 +121,24 @@ public class Triple {
 	public void set_objectType(String _objectType) {
 		this._objectType = _objectType;
 	}
-
+	public String get_subjectNS() {
+		return _subjectNS;
+	}
+	public void set_subjectNS(String _subjectNS) {
+		this._subjectNS = _subjectNS;
+	}
+	public String get_predicateNS() {
+		return _predicateNS;
+	}
+	public void set_predicateNS(String _predicateNS) {
+		this._predicateNS = _predicateNS;
+	}
+	public String get_objectNS() {
+		return _objectNS;
+	}
+	public void set_objectNS(String _objectNS) {
+		this._objectNS = _objectNS;
+	}
 	public Vector<String> toVector() {
 		Vector<String> triple = new Vector<String>();
 		if(Ontology.isValidPrefix(_subjectNS)) {
@@ -161,6 +179,24 @@ public class Triple {
 			triple.add( _objectNS +Ontology.SEPARATOR_URI +_object);
 		}
 		return triple;
+	}
+	public String toStringForTurtle(){
+		String ris ="";
+		ris+="<"+_subjectNS +Ontology.SEPARATOR_URI +_subject+ "> ";
+		
+		if(Ontology.isValidPrefix(_predicateNS)) {
+			ris+=_predicateNS +Ontology.SEPARATOR_PREFIX +_predicate+ " ";
+		}else {
+			ris+="<"+ _predicateNS +Ontology.SEPARATOR_URI +_predicate+"> ";
+		}
+		if(Ontology.LITERAL == _objectType) {
+			ris+="\""+ _object+"\" ";			
+		}else if(Ontology.NUMBER ==_objectType){
+			ris+=""+ _object+" ";		
+		}
+		ris += ".";
+		return ris;
+		
 	}
 	/*
 	@Override

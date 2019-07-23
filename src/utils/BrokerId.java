@@ -19,13 +19,14 @@ public class BrokerId {
 	private int actualID=0;
 
 	public BrokerId() {
-		actualID = getLastFromSib();
+		//actualID = getLastFromSib(); //old versione, ID saved on sib
 	}
 	public int getActualID() {
 		return actualID;
 	}
 
-
+	//old versione, ID saved on sib
+	/*
 	public int getLastFromSib(){
 		try {
 			KPConnector.GetInstance().join();
@@ -52,6 +53,7 @@ public class BrokerId {
 			e.printStackTrace();
 		}
 	}
+	*/
 	public int getNextId() {
 		actualID+=1;
 		return actualID;

@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 	
 import model.Document;
+import persistence.file.TripleToFile;
 import persistence.sib.KPConnector;
 import persistence.sib.Triple;
 
@@ -23,7 +24,7 @@ public class VTDSibConnector {
 			KPConnector.GetInstance().insert(triples,MAX_RATE);
 		}
 		if(USE_FILE) {
-		
+			TripleToFile.GetInstance().insert(triples);
 		}
 	}
 	

@@ -164,26 +164,9 @@ public class KPConnector {
 		if (triples != null){
 			for(int i=0; i<triples.size() ; i++ ){
 				Vector<String> t=triples.get(i);
-				String temp[] = t.get(0).split("#");
-				String nameSpace ="";
-				String s = "";
-				String o = "";
-				String p = "";
-				if(temp.length>1) {
-					nameSpace = temp[0];
-					s = temp[1];
-				}else {
-					s = temp[0];
-				}
-				if(nameSpace=="") {
-					p = t.get(1);
-					o = t.get(2);
-				}else {
-					p = t.get(1).split("#")[1];
-					o = t.get(2).split("#")[1];
-				}				
+			
 				//la kp non consente di ottenere SubjectType
-				ris.add(new Triple(nameSpace,s,p,o,defaultSubjectType,t.get(3)));
+				ris.add(new Triple(t.get(0),t.get(1),t.get(2)));
 			}
 		}
 		return ris;
