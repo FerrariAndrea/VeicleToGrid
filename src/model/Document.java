@@ -147,7 +147,7 @@ public class Document implements ISubject<LocalDateTime>{
 		ris.add(new Triple(s,Ontology.vtg_initialChargteStorage,ConstantProject.InitialChargeStorage+""));
 		ris.add(new Triple(s,Ontology.vtg_maxChargeStorageCapacity,ConstantProject.maxChargeStorageCapacity+""));
 		ris.add(new Triple(s,Ontology.vtg_maxChargeVehicleStorage,ConstantProject.maxChargeVehicleStorage+""));		
-		ris.add(new Triple(s,Ontology.maxDurationCarPark,ConstantProject.maxDurationCarPark+""));
+		ris.add(new Triple(s,Ontology.vtg_maxDurationCarPark,ConstantProject.maxDurationCarPark+""));
 		ris.add(new Triple(s,Ontology.vtg_minDurationCarPark,ConstantProject.minDurationCarPark+""));
 		ris.add(new Triple(s,Ontology.vtg_maxVehicleCapacityOnArrive,ConstantProject.maximumVehicleCapacityWhenArriveToParkingSpace+""));
 		ris.add(new Triple(s,Ontology.vtg_minTimeToNowForReserving,ConstantProject.minTimeToNowForReserving+""));

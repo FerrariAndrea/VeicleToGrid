@@ -12,6 +12,7 @@ import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import model.SingleForecast.TimeSlot;
 import persistence.sib.KPConnector;
+import persistence.sib.Ontology;
 import persistence.sib.Triple;
 
 public class TripleToFile {
@@ -54,8 +55,8 @@ public class TripleToFile {
 		public void setNewNameForNewInsert(boolean _newNameForNewInsert) {
 			this._newNameForNewInsert = _newNameForNewInsert;
 		}
-
 		
+
 		public void insert(List<Triple> t) throws Exception {
 				String name = _fullpath ;
 				if(_newNameForNewInsert) {
@@ -64,6 +65,11 @@ public class TripleToFile {
 					name+=".txt";
 				}
 			    BufferedWriter writer = new BufferedWriter(new FileWriter(name, true));
+			    for(Iterator<String> keys = Ontology._prefixsRef.keySet().iterator();keys.hasNext();) {
+			    	String prefix = keys.next();
+			    	writer.append("@prefix " + prefix + ": "+Ontology.resolvePrefix(prefix)+" .\n");			    	
+			    }
+				writer.append("\n\n\n");	
 			    for (Iterator<Triple> i = t.iterator(); i.hasNext();) {	
 			    	writer.append(i.next().toStringForTurtle()+"\n");
 			    }

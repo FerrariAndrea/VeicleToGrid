@@ -18,23 +18,7 @@ public class Triple {
 	private String _objectNS;
 	
 
-	/*
-	public Triple( String _subject, String _predicate, String _object, String _subjectType,String _objectType) {
-		//this._nameSpace = _nameSpace.replaceAll(SEPARATOR, "")+SEPARATOR;
-		this._subject = _subject;//_subject.replaceAll(SEPARATOR, "");
-		this._predicate =_predicate;// _predicate.replaceAll(SEPARATOR, "");
-		this._object = _object;//_object.replaceAll(SEPARATOR, "");
-		this._subjectType = _subjectType;
-		this._objectType = _objectType;
-	}
-	/*
-		public String get_nameSpace() {
-			return _nameSpace;
-		}
-		public void set_nameSpace(String _nameSpace) {
-			this._nameSpace = _nameSpace;
-		}
-	*/
+	
 
 	public Triple(String _subjectPrefix,String _subject,String _predicatePrefix, String _predicate, String _objectPrefix, String _object, String _subjectType, String _objectType
 			 ) {
@@ -50,31 +34,61 @@ public class Triple {
 		this._objectNS = _objectPrefix;
 	}
 	//FAST TRIPLE
-	public Triple(String _subject,String _predicate,String _object) {
+	public Triple(String _subject,String _predicate,String _object,String _objectType) {
 		
-		if(_subject.contains(":")) {
+		if(_subject.contains(":") && Ontology.isValidPrefix(_subject.split(":")[0])) {
 			this._subject = _subject.split(":")[1];
-			this._subjectType = Ontology.resolveType(_subject.split(":")[0],this._subject);
-			this._subjectNS = _subject.split(":")[0];
+			this._subjectType = Ontology.RESOURCE;	//this._subjectType = Ontology.resolveType(_subject.split(":")[0],this._subject);
+			this._subjectNS = _subject.split(":")[0];//as Prefix 
 		}else {
 			this._subject = _subject;
-			this._subjectType = Ontology.LITERAL;		
+			this._subjectType = Ontology.RESOURCE;		
 			this._subjectNS ="";
 		}
-		if(_predicate.contains(":")) {
+		if(_predicate.contains(":") && Ontology.isValidPrefix(_predicate.split(":")[0])) {
 			this._predicate = _predicate.split(":")[1];
-			this._predicateNS = _predicate.split(":")[0];
+			this._predicateNS = _predicate.split(":")[0];//as Prefix 
 		}else {
 			this._predicate = _predicate;
 			this._predicateNS = "";			
 		}
-		if(_object.contains(":")) {
+		if(_object.contains(":") && Ontology.isValidPrefix(_object.split(":")[0])) {
 			this._object = _object.split(":")[1];
-			this._objectType = Ontology.resolveType( _object.split(":")[0], this._object);			
-			this._objectNS = _object.split(":")[0];
+			this._objectType =_objectType;
+			//this._objectType = Ontology.resolveType(_predicate);			
+			this._objectNS = _object.split(":")[0];//as Prefix 
 		}else {
 			this._object = _object;
-			this._objectType = Ontology.LITERAL;		
+			this._objectType =_objectType;// Ontology.LITERAL;		
+			this._objectNS ="";
+		}
+	
+	}
+public Triple(String _subject,String _predicate,String _object) {
+		
+		if(_subject.contains(":") && Ontology.isValidPrefix(_subject.split(":")[0])) {
+			this._subject = _subject.split(":")[1];
+			this._subjectType = Ontology.RESOURCE;	// this._subjectType = Ontology.resolveType(_subject.split(":")[0],this._subject);
+			this._subjectNS = _subject.split(":")[0];//as Prefix 
+		}else {
+			this._subject = _subject;
+			this._subjectType = Ontology.RESOURCE;		
+			this._subjectNS ="";
+		}
+		if(_predicate.contains(":") && Ontology.isValidPrefix(_predicate.split(":")[0])) {
+			this._predicate = _predicate.split(":")[1];
+			this._predicateNS = _predicate.split(":")[0];//as Prefix 
+		}else {
+			this._predicate = _predicate;
+			this._predicateNS = "";			
+		}
+		if(_object.contains(":") && Ontology.isValidPrefix(_object.split(":")[0])) {
+			this._object = _object.split(":")[1];
+			this._objectType = Ontology.resolveObjectType(_predicate);	
+			this._objectNS = _object.split(":")[0];//as Prefix 
+		}else {
+			this._object = _object;
+			this._objectType = Ontology.resolveObjectType(_predicate);// Ontology.LITERAL;		
 			this._objectNS ="";
 		}
 	
@@ -85,8 +99,8 @@ public class Triple {
 		this._subject = _subject;
 		this._predicate = _predicate;
 		this._object = _object;
-		this._subjectType = Ontology.resolveType(_subjectPrefix, _subject);
-		this._objectType = Ontology.resolveType(_objectPrefix, _object);
+		this._subjectType = Ontology.RESOURCE;
+		this._objectType = Ontology.resolveObjectType(_predicate);
 		this._subjectNS = _subjectPrefix;
 		this._predicateNS = _predicatePrefix;
 		this._objectNS = _objectPrefix;
@@ -147,20 +161,27 @@ public class Triple {
 			triple.add( _subjectNS +Ontology.SEPARATOR_URI +_subject);
 		}
 		if(Ontology.isValidPrefix(_predicateNS)) {
-			triple.add(Ontology.resolvePrefix( _predicateNS) +Ontology.SEPARATOR_PREFIX +_predicate);
+			triple.add(Ontology.resolvePrefix( _predicateNS) +Ontology.SEPARATOR_URI +_predicate);
 		}else {
 			triple.add( _predicateNS +Ontology.SEPARATOR_URI +_predicate);
 		}
+		
+	if(_objectNS!="") {
 		if(Ontology.isValidPrefix(_objectNS)) {
-			triple.add( Ontology.resolvePrefix(_objectNS) +Ontology.SEPARATOR_PREFIX +_object);
+			triple.add(Ontology.resolvePrefix( _objectNS) +Ontology.SEPARATOR_URI +_object);
 		}else {
 			triple.add( _objectNS +Ontology.SEPARATOR_URI +_object);
 		}
+	}else {
+		triple.add( _object);
+	}
+	
+		
 		triple.add(_subjectType);
 		triple.add(_objectType);
 		return triple;
 	}
-	
+	/*
 	public Vector<String> toVectorForTurtle(){
 		Vector<String> triple = new Vector<String>();
 		if(Ontology.isValidPrefix(_subjectNS)) {
@@ -180,19 +201,46 @@ public class Triple {
 		}
 		return triple;
 	}
+	*/
 	public String toStringForTurtle(){
 		String ris ="";
-		ris+="<"+_subjectNS +Ontology.SEPARATOR_URI +_subject+ "> ";
-		
+				
+		if(Ontology.LITERAL == _subjectType) {
+			ris+="\""+ _subject+"\" ";			
+		}else if(Ontology.NUMBER ==_subjectType){
+			ris+= _subject+" ";		
+		}else if(Ontology.RESOURCE ==_subjectType){
+			if(_subjectNS!="") {
+				if(Ontology.isValidPrefix(_predicateNS)) {
+					ris+=_subjectNS +Ontology.SEPARATOR_PREFIX +_subject+ " ";
+				}else {
+					ris+="<"+ _subjectNS +Ontology.SEPARATOR_URI +_subject+"> ";
+				}		
+			}else {
+				ris+="<"+_subject+ "> ";			
+			}			
+		}
+	
 		if(Ontology.isValidPrefix(_predicateNS)) {
 			ris+=_predicateNS +Ontology.SEPARATOR_PREFIX +_predicate+ " ";
 		}else {
 			ris+="<"+ _predicateNS +Ontology.SEPARATOR_URI +_predicate+"> ";
 		}
+		
 		if(Ontology.LITERAL == _objectType) {
 			ris+="\""+ _object+"\" ";			
 		}else if(Ontology.NUMBER ==_objectType){
 			ris+=""+ _object+" ";		
+		}else if(Ontology.RESOURCE ==_objectType){
+			if(_objectNS!="") {
+				if(Ontology.isValidPrefix(_predicateNS)) {
+					ris+=_objectNS +Ontology.SEPARATOR_PREFIX +_object+ " ";
+				}else {
+					ris+="<"+ _objectNS +Ontology.SEPARATOR_URI +_object+"> ";
+				}		
+			}else {
+				ris+="<"+_object+ "> ";			
+			}			
 		}
 		ris += ".";
 		return ris;
