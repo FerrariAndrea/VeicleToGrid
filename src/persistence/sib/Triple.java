@@ -205,10 +205,8 @@ public Triple(String _subject,String _predicate,String _object) {
 	public String toStringForTurtle(){
 		String ris ="";
 				
-		if(Ontology.LITERAL == _subjectType) {
-			ris+="\""+ _subject+"\" ";			
-		}else if(Ontology.NUMBER ==_subjectType){
-			ris+= _subject+" ";		
+		if(Ontology.LITERAL == _subjectType) {//inutile un soggetto non può essere un literale
+			ris+="'"+ _subject+"' ";		
 		}else if(Ontology.RESOURCE ==_subjectType){
 			if(_subjectNS!="") {
 				if(Ontology.isValidPrefix(_predicateNS)) {
@@ -219,7 +217,10 @@ public Triple(String _subject,String _predicate,String _object) {
 			}else {
 				ris+="<"+_subject+ "> ";			
 			}			
+		}else {
+			ris+="'"+ _subject+"'"+_subjectType+" ";
 		}
+	
 	
 		if(Ontology.isValidPrefix(_predicateNS)) {
 			ris+=_predicateNS +Ontology.SEPARATOR_PREFIX +_predicate+ " ";
@@ -228,9 +229,7 @@ public Triple(String _subject,String _predicate,String _object) {
 		}
 		
 		if(Ontology.LITERAL == _objectType) {
-			ris+="\""+ _object+"\" ";			
-		}else if(Ontology.NUMBER ==_objectType){
-			ris+=""+ _object+" ";		
+			ris+="'"+ _object+"' ";			
 		}else if(Ontology.RESOURCE ==_objectType){
 			if(_objectNS!="") {
 				if(Ontology.isValidPrefix(_predicateNS)) {
@@ -241,6 +240,8 @@ public Triple(String _subject,String _predicate,String _object) {
 			}else {
 				ris+="<"+_object+ "> ";			
 			}			
+		}else {
+			ris+=""+ _object+"'"+_objectType+" ";
 		}
 		ris += ".";
 		return ris;

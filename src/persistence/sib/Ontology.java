@@ -7,14 +7,19 @@ public class Ontology {
 	
 	//------------------------------------------------------------------
 	public static String RESOURCE = "resource";
-	public static String BLANKNODE = "blanknode";
+	public static String BLANKNODE = "";
 	public static String LITERAL = "literal";
-	public static String NUMBER = "number";
+	public static String LITERAL_INTEGER = "^^xsd:integer";
+	public static String LITERAL_FLOAT = "^^xsd:float";
+	public static String LITERAL_DATE = "^^xsd:datetimestamp";
+	public static String LITERAL_BOOL = "^^xsd:boolean";
+	public static String LITERAL_DECIMAL = "^^xsd:decimal";
+	
 	public static String UNKNOW = "";
 	public static String SEPARATOR_URI = "#";
 	public static String SEPARATOR_PREFIX = ":";
 	//--------------------------------------------------APPLICAZIONE
-	public static String APP_NS = "http://veicletogridsimulator/"+SEPARATOR_URI;
+	public static String APP_NS = "app"+SEPARATOR_PREFIX;//"http://veicletogridsimulator/"+SEPARATOR_URI;
 	//--------------------------------------------------ONTOLOGIA APLLICAZIONE
 	public static String vtg_SimulationScreen ="vtg:SimulationScreen";
 	public static String vtg_chargingSpeedStorageByEnel ="vtg:chargingSpeedStorageByEnel";
@@ -65,39 +70,39 @@ public class Ontology {
 		//prefix
 		_prefixsRef.put("rdf","http://www.w3.org/1999/02/22-rdf-syntax-ns/");
 		_prefixsRef.put("vtg","http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid/");
-		
+		_prefixsRef.put("app","http://veicletogridsimulator/");
 		
 		_objectTypeIfHasPredicate.put(rdf_type,RESOURCE);
-		_objectTypeIfHasPredicate.put(vtg_SimulationScreen,RESOURCE);
-		_objectTypeIfHasPredicate.put(vtg_chargingSpeedStorageByEnel,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_chargingVehiclesSpeed,NUMBER);
+		_objectTypeIfHasPredicate.put(vtg_SimulationScreen,LITERAL_FLOAT);
+		_objectTypeIfHasPredicate.put(vtg_chargingSpeedStorageByEnel,LITERAL_FLOAT);
+		_objectTypeIfHasPredicate.put(vtg_chargingVehiclesSpeed,LITERAL_INTEGER);
 		_objectTypeIfHasPredicate.put(vtg_hasForecast,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_hasParking,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_hasStore,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_hasUser,RESOURCE);
-		_objectTypeIfHasPredicate.put(vtg_initialChargteStorage,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_maxChargeStorageCapacity,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_maxChargeVehicleStorage,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_maxDurationCarPark,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_minDurationCarPark,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_maxVehicleCapacityOnArrive,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_minTimeToNowForReserving,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_numberParkingSpace,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_timeStamp,LITERAL);
+		_objectTypeIfHasPredicate.put(vtg_initialChargteStorage,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_maxChargeStorageCapacity,LITERAL_FLOAT);
+		_objectTypeIfHasPredicate.put(vtg_maxChargeVehicleStorage,LITERAL_FLOAT);
+		_objectTypeIfHasPredicate.put(vtg_maxDurationCarPark,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_minDurationCarPark,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_maxVehicleCapacityOnArrive,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_minTimeToNowForReserving,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_numberParkingSpace,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_timeStamp,LITERAL_DATE);
 		_objectTypeIfHasPredicate.put(vtg_hasWheater,RESOURCE);
-		_objectTypeIfHasPredicate.put(vtg_inDate,LITERAL);
+		_objectTypeIfHasPredicate.put(vtg_inDate,LITERAL_DATE);
 		_objectTypeIfHasPredicate.put(vtg_wheaterAt,LITERAL);
 		_objectTypeIfHasPredicate.put(vtg_wheaterIs,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_hasReservations,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_isComposed,RESOURCE);
-		_objectTypeIfHasPredicate.put(vtg_hasId,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_isBusy,LITERAL);
-		_objectTypeIfHasPredicate.put(vtg_parkingVeicleStorage,NUMBER);
-		_objectTypeIfHasPredicate.put(vtg_startTimeReserving,LITERAL);
-		_objectTypeIfHasPredicate.put(vtg_endTimeReserving,LITERAL);
+		_objectTypeIfHasPredicate.put(vtg_hasId,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_isBusy,LITERAL_BOOL);
+		_objectTypeIfHasPredicate.put(vtg_parkingVeicleStorage,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_startTimeReserving,LITERAL_DATE);
+		_objectTypeIfHasPredicate.put(vtg_endTimeReserving,LITERAL_DATE);
 		_objectTypeIfHasPredicate.put(vtg_isReferedTo,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_owner,RESOURCE);
-		_objectTypeIfHasPredicate.put(vtg_actualCharge,NUMBER);
+		_objectTypeIfHasPredicate.put(vtg_actualCharge,LITERAL_FLOAT);
 		_objectTypeIfHasPredicate.put(vtg_hasEmail,LITERAL);
 		_objectTypeIfHasPredicate.put(vtg_Nickname,LITERAL);
 		_objectTypeIfHasPredicate.put(vtg_Password,LITERAL);
