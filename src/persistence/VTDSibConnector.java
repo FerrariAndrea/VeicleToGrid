@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 	
 import model.Document;
+import model.ParametersSimulation;
 import persistence.file.TripleToFile;
 import persistence.sib.KPConnector;
 import persistence.sib.Triple;
@@ -11,8 +12,6 @@ import persistence.sib.Triple;
 public class VTDSibConnector {
 
 	private static int  MAX_RATE =150;//triple alla volta 
-	private static boolean USE_SIB = true;
-	private static boolean USE_FILE = true;
 	
 	
 	
@@ -20,12 +19,11 @@ public class VTDSibConnector {
 		KPConnector.GetInstance().join();
 
 		List<Triple> triples = Document.GetInstance().toTriple();
-		if(USE_SIB) {
+		String location = ParametersSimulation.GetInstance().getInformationOfParameter("Location output").getValue().toString();
+		if(location.equals("SIB"))
 			KPConnector.GetInstance().insert(triples,MAX_RATE);
-		}
-		if(USE_FILE) {
+		else
 			TripleToFile.GetInstance().insert(triples);
-		}
 	}
 	
 	public static List<Triple> getSnap() throws Exception{

@@ -19,10 +19,11 @@ public class StoragePolicyFactory {
 		protected double updateStorageDueToPhotovoltaicPanels(double actualStorage){
 			
 			if(!isNight()){
-				int generatedPower = ConstantProject.generatedPowerByPanelsPhotovoltaic.get(WheaterForecast.GetInstance().getWheater(Document.GetInstance().getTime().toLocalTime()));
+				Wheater w = WheaterForecast.GetInstance().getWheater(Document.GetInstance().getTime().toLocalTime());
+				int generatedPower = Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("generatedPowerByPanelsPhotovoltaic-"+w.toString()).getValue());
 				double newChargeStorage = actualStorage + (generatedPower/60.0);		//KW to Wmin
-				if(newChargeStorage > ConstantProject.maxChargeStorageCapacity) 
-					return ConstantProject.maxChargeStorageCapacity;
+				if(newChargeStorage > Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue())) 
+					return Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 				return newChargeStorage;
 			}
 			return actualStorage;
@@ -34,8 +35,8 @@ public class StoragePolicyFactory {
 		}
 		
 		protected double updateStorageDueToEnel(double actualStorage){
-			double newChargeStorage = actualStorage + (ConstantProject.chargingSpeedStorageByEnel/60.0);		//KW to Wmin
-			if(newChargeStorage > ConstantProject.maxChargeStorageCapacity) return ConstantProject.maxChargeStorageCapacity;
+			double newChargeStorage = actualStorage + (Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("chargingSpeedStorageByEnel").getValue())/60.0);		//KW to Wmin
+			if(newChargeStorage > Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue())) return Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 			return newChargeStorage;
 		}
 		
@@ -43,10 +44,10 @@ public class StoragePolicyFactory {
 			//trovo quanta carica dello storage mi serve per ricaricare i veicoli che hanno una carica inferiore alla soglia chargeThreshold
 			double requestCharge = 0;
 			for(ParkingSpace p : Parking.GetInstance().getParkingSpace()){
-				if(!p.isFree() && p.getActualVehicleStorage() < (chargeThreshold * ConstantProject.maxChargeVehicleStorage)){
-					if((p.getActualVehicleStorage() + (ConstantProject.chargingVehiclesSpeed / 60.0)) > ConstantProject.maxChargeVehicleStorage)
-						requestCharge += ConstantProject.maxChargeVehicleStorage - p.getActualVehicleStorage();
-					else requestCharge += ConstantProject.chargingVehiclesSpeed / 60.0; //KWh to Wmin
+				if(!p.isFree() && p.getActualVehicleStorage() < (chargeThreshold * Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue()))){
+					if((p.getActualVehicleStorage() + (Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("chargingVehiclesSpeed").getValue()) / 60.0)) > Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue()))
+						requestCharge += Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue()) - p.getActualVehicleStorage();
+					else requestCharge += Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("chargingVehiclesSpeed").getValue()) / 60.0; //KWh to Wmin
 				}
 			}
 			
@@ -56,7 +57,7 @@ public class StoragePolicyFactory {
 				
 				//esito positivo aggiorno quindi la carica dei veicoli trovati precedentemente
 				for(ParkingSpace p : Parking.GetInstance().getParkingSpace()){
-					if(!p.isFree() && p.getActualVehicleStorage() < (chargeThreshold * ConstantProject.maxChargeVehicleStorage)){
+					if(!p.isFree() && p.getActualVehicleStorage() < (chargeThreshold * Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue()))){
 						p.updateVehicleStorage();
 					}
 				}
@@ -85,7 +86,7 @@ public class StoragePolicyFactory {
 	private class CheapStoragePolicy extends StoragePolicy{
 		
 		public CheapStoragePolicy(){
-			double perc = Storage.GetInstance().getActualCharge() / ConstantProject.maxChargeStorageCapacity;
+			double perc = Storage.GetInstance().getActualCharge() / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 			if(perc >= 0.3) _state = new FullVehicleCharge();
 			if(perc >= 0.1 && perc < 0.3) _state = new HalfVehicleCharge();
 			if(perc < 0.1) _state = new Discharge();
@@ -104,7 +105,7 @@ public class StoragePolicyFactory {
 
 			@Override
 			public State changeState(double storage) {
-				double perc = storage / ConstantProject.maxChargeStorageCapacity;
+				double perc = storage / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 				if(perc >= 0.15) return new HalfVehicleCharge();
 				return this;
 			}
@@ -120,7 +121,7 @@ public class StoragePolicyFactory {
 
 			@Override
 			public State changeState(double storage) {
-				double perc = storage / ConstantProject.maxChargeStorageCapacity;
+				double perc = storage / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 				if(perc >= 0.4) return new FullVehicleCharge();
 				if(perc < 0.1 ) return new Discharge();
 				return this;
@@ -135,7 +136,7 @@ public class StoragePolicyFactory {
 
 			@Override
 			public State changeState(double storage) {
-				double perc = storage / ConstantProject.maxChargeStorageCapacity;
+				double perc = storage / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 				if(perc < 0.3) return new HalfVehicleCharge();
 				return this;
 			}
@@ -145,7 +146,7 @@ public class StoragePolicyFactory {
 	private class ExpensiveStoragePolicy extends StoragePolicy{
 	
 		public ExpensiveStoragePolicy(){
-			double perc = Storage.GetInstance().getActualCharge() / ConstantProject.maxChargeStorageCapacity;
+			double perc = Storage.GetInstance().getActualCharge() / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 			if(perc < 0.1) _state = new Discharge();
 			else _state = new FullVehicleCharge();
 		}
@@ -163,7 +164,7 @@ public class StoragePolicyFactory {
 
 			@Override
 			public State changeState(double storage) {
-				double perc = storage / ConstantProject.maxChargeStorageCapacity;
+				double perc = storage / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 				if(perc >= 0.15) return new FullVehicleCharge();
 				return this;
 			}
@@ -180,7 +181,7 @@ public class StoragePolicyFactory {
 
 			@Override
 			public State changeState(double storage) {
-				double perc = storage / ConstantProject.maxChargeStorageCapacity;
+				double perc = storage / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue());
 				if(perc < 0.1) return new Discharge();
 				return this;
 			}

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.SingleForecast.TimeSlot;
 import persistence.VTDSibConnector;
 import persistence.sib.Ontology;
 import persistence.sib.Triple;
@@ -16,6 +15,7 @@ import utils.Utilities;
 public class Document implements ISubject<LocalDateTime>{
 	private ArrayList<RegisteredUser> _registeredUser;
 	private static Document _instance = null;
+	private LocalDateTime _initialTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 	private LocalDateTime _currentTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);	//tempo corrente applicazione
 	private boolean _exitApplication = false;
 	private boolean _startApplication = false;
@@ -23,6 +23,7 @@ public class Document implements ISubject<LocalDateTime>{
 	private ArrayList<IObserver<LocalDateTime>> _observer = new ArrayList<>();
 	private int _sleepTimeStep = 500;
 	private String _nameSpace = "http://veicletogrid";
+	
 	private Document(){
 		_registeredUser = new ArrayList<>();
 		_step = new Step();
@@ -91,15 +92,47 @@ public class Document implements ISubject<LocalDateTime>{
     
     //metodo per riattivare l'applicazione dopo una pausa
     public void resumePause(){
-    	_step.getSemaphore().release();
+    	if(_step.isInPause())_step.getSemaphore().release();
     }
 	
+    public boolean isInPause() {
+    	return _step.isInPause();
+    }
+    
     //metodo per terminare l'applicazione
     public void exit(){
     	if(_step.isInPause()) resumePause();
 		_exitApplication = true;
 		if(CurrentSession.GetInstance().getRegisteredUser() != null) CurrentSession.GetInstance().Logout();
 	}
+    
+    //metodo per resettare il simulatore
+    public void reset() {
+    	//fermo il tempo e metto in pausa
+    	pause();
+    	
+    	//resetto il tempo
+    	_currentTime = _initialTime;
+    	notifyObserver();
+    	
+    	//resetto le previsioni del tempo
+    	WheaterForecast.GetInstance().reset();
+    	
+    	//reset dello storage
+    	Storage.GetInstance().reset();
+    	
+    	//reset dei parcheggi e delle prenotazioni
+    	Parking.GetInstance().reset();
+    	
+    	//reset semafori ed eventi
+    	ContainerEvent.GetInstance().reset();
+    	
+    	//esco da un eventuale sessione corrente
+    	CurrentSession.GetInstance().reset();
+    	
+    	//reset dei parametri
+    	ParametersSimulation.GetInstance().resetAllParameters();
+    }
 
 	@Override
 	public void attachObserver(IObserver<LocalDateTime> observer) {
@@ -127,31 +160,20 @@ public class Document implements ISubject<LocalDateTime>{
 		}
 	}
 	
-	public void loadFromSIB(){
-		/*
-		try {
-			VTDSibConnector.stampSnap();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-	}
-	
 	public List<Triple> toTriple(){
 		String s = Ontology.APP_NS+ "SimulationScreenInstance";
 		List<Triple> ris = new ArrayList<Triple>();
 		ris.add(new Triple(s,Ontology.rdf_type,Ontology.vtg_SimulationScreen));
-		ris.add(new Triple(s,Ontology.vtg_chargingSpeedStorageByEnel,ConstantProject.chargingSpeedStorageByEnel+""));
-		ris.add(new Triple(s,Ontology.vtg_chargingVehiclesSpeed,ConstantProject.chargingVehiclesSpeed+""));
-		ris.add(new Triple(s,Ontology.vtg_initialChargteStorage,ConstantProject.InitialChargeStorage+""));
-		ris.add(new Triple(s,Ontology.vtg_maxChargeStorageCapacity,ConstantProject.maxChargeStorageCapacity+""));
-		ris.add(new Triple(s,Ontology.vtg_maxChargeVehicleStorage,ConstantProject.maxChargeVehicleStorage+""));		
-		ris.add(new Triple(s,Ontology.vtg_maxDurationCarPark,ConstantProject.maxDurationCarPark+""));
-		ris.add(new Triple(s,Ontology.vtg_minDurationCarPark,ConstantProject.minDurationCarPark+""));
-		ris.add(new Triple(s,Ontology.vtg_maxVehicleCapacityOnArrive,ConstantProject.maximumVehicleCapacityWhenArriveToParkingSpace+""));
-		ris.add(new Triple(s,Ontology.vtg_minTimeToNowForReserving,ConstantProject.minTimeToNowForReserving+""));
-		ris.add(new Triple(s,Ontology.vtg_numberParkingSpace,ConstantProject.numberNormalParkingSpace+""));
+		ris.add(new Triple(s,Ontology.vtg_chargingSpeedStorageByEnel,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("chargingSpeedStorageByEnel").getValue())+""));
+		ris.add(new Triple(s,Ontology.vtg_chargingVehiclesSpeed,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("chargingVehiclesSpeed").getValue())+""));
+		ris.add(new Triple(s,Ontology.vtg_initialChargteStorage,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("InitialChargeStorage").getValue())+""));
+		ris.add(new Triple(s,Ontology.vtg_maxChargeStorageCapacity,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeStorageCapacity").getValue())+""));
+		ris.add(new Triple(s,Ontology.vtg_maxChargeVehicleStorage,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue())+""));		
+		ris.add(new Triple(s,Ontology.vtg_maxDurationCarPark,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxDurationCarPark").getValue())+""));
+		ris.add(new Triple(s,Ontology.vtg_minDurationCarPark,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("minDurationCarPark").getValue())+""));
+		ris.add(new Triple(s,Ontology.vtg_maxVehicleCapacityOnArrive,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maximumVehicleCapacityWhenArriveToParkingSpace").getValue())+""));
+		ris.add(new Triple(s,Ontology.vtg_minTimeToNowForReserving,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("minTimeToNowForReserving").getValue())+""));
+		ris.add(new Triple(s,Ontology.vtg_numberParkingSpace,Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("numberNormalParkingSpace").getValue())+""));
 		ris.add(new Triple(s,Ontology.vtg_timeStamp, Utilities.getTimeStamp(getTime())));
 		
 		ris.addAll(WheaterForecast.GetInstance().toTriple(s, Ontology.vtg_hasForecast));

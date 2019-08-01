@@ -74,6 +74,9 @@ public class WheaterForecast implements ISubject<SingleForecast>{
 			o.update(arr[_queue.size() - 1]);
 	}
 	
+	public void reset() {
+		New();
+	}
 	
 	public List<Triple> toTriple(String parent,String predicateOfParent){
 	

@@ -2,11 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import persistence.sib.Triple;
 import presentation.IObserver;
 
 public class ContainerEvent implements ISubject<Log>{
@@ -47,7 +44,7 @@ public class ContainerEvent implements ISubject<Log>{
 		for(MySemaphore s : _sem)
 			if(s.isReady()){
 				s.release();
-			}
+		}
 		
 		for(Iterator<MySemaphore> iter = _sem.listIterator(); iter.hasNext(); ){
 			MySemaphore s = iter.next();
@@ -91,6 +88,35 @@ public class ContainerEvent implements ISubject<Log>{
 			for(Log l : _logs)
 				o.update(l);
 		}
+	}
+	
+	public void reset() {
+		_lockEvent.lock();
+		_lockSem.lock();
+		//reset eventi futuri
+		_randomEvent.clear();
+		
+		//reset Semafori
+		for(MySemaphore s : _sem)
+			if(s.isReady()){
+				s.release();
+		}
+		_sem.clear();
+		
+		
+		IGeneratorEvent g = RandomGeneratorFactory.CreateGeneratorEntryEvent();
+    	Thread entryCostumer = new Thread(g);
+    	entryCostumer.start();
+    	g = RandomGeneratorFactory.CreateGeneratorWheaterEvent();
+    	Thread wheaterForecast = new Thread(g);
+    	wheaterForecast.start();
+    	
+		
+		//reset log
+		_logs.clear();
+		
+		_lockSem.unlock();
+		_lockEvent.unlock();
 	}
 	
 }

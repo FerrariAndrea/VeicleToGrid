@@ -274,8 +274,8 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 
 		@Override
 		public void updateVehicleStorage() {
-			double newVehicleStorage = _actualVehicleStorage + (ConstantProject.chargingVehiclesSpeed/60.0);		//KW to Wmin
-			if(newVehicleStorage > ConstantProject.maxChargeVehicleStorage) _actualVehicleStorage = ConstantProject.maxChargeVehicleStorage;
+			double newVehicleStorage = _actualVehicleStorage + (Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("chargingVehiclesSpeed").getValue())/60.0);		//KW to Wmin
+			if(newVehicleStorage > Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue())) _actualVehicleStorage = Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue());
 			else _actualVehicleStorage = newVehicleStorage;
 		}
 
@@ -286,6 +286,15 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 		
 	
 	}
+	
+	public void reset() {
+		//elimino le varie prenotazioni presenti
+		_reserving.clear();
+		
+		//rendo libero il parcheggio
+		if(!_state.isFree()) makeFree();
+	}
+	
 	public List<Triple> toTriple(String parent,String predicateOfParent){
 		List<Triple> ris = new ArrayList<Triple>();
 		String s = Ontology.APP_NS+ getTripleSubject();		

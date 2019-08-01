@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Wheater {
-	sunny(0), cloudy(1), rain(2);
+	Sunny(0), Cloudy(1), Rain(2);
 	
 	private int wheater;
 	

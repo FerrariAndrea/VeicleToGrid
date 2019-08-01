@@ -122,7 +122,7 @@ public class ObserverFactory {
 		}
 		
 		private void busy(ParkingSpace p){
-			getControl().setProgress(((double)p.getActualVehicleStorage()) / ConstantProject.maxChargeVehicleStorage);
+			getControl().setProgress(((double)p.getActualVehicleStorage()) / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue()));
 			getControl().setOpacity(1);
 			setColour();
 		}
@@ -152,7 +152,7 @@ public class ObserverFactory {
 
 				@Override
 				public void run() {
-					getControl().setProgress(storage.getActualCharge() / ConstantProject.InitialChargeStorage);
+					getControl().setProgress(storage.getActualCharge() / Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("InitialChargeStorage").getValue()));
 					getControl().getStyleClass().removeAll(barColorStyleClasses);
 					setColour();
 				}
@@ -176,7 +176,6 @@ public class ObserverFactory {
 						getControl().getData().get(0).getData().get(0).setYValue(getControl().getData().get(0).getData().get(0).getYValue().intValue() + 1);
 						getControl().getData().get(1).getData().get(0).setYValue(getControl().getData().get(1).getData().get(0).getYValue().intValue() - 1);
 					}else{
-						System.out.print("c");
 						getControl().getData().get(0).getData().get(0).setYValue(getControl().getData().get(0).getData().get(0).getYValue().intValue() - 1);
 						getControl().getData().get(1).getData().get(0).setYValue(getControl().getData().get(1).getData().get(0).getYValue().intValue() + 1);
 					}
@@ -356,7 +355,7 @@ public class ObserverFactory {
 					HBox.setHgrow(_label, Priority.ALWAYS);
 					
 					File file = null;
-					if(isNight() && w.compareTo(Wheater.sunny) == 0) file = new File("./immagini/moon.jpeg");
+					if(isNight() && w.compareTo(Wheater.Sunny) == 0) file = new File("./immagini/moon.jpeg");
 					else file = new File("./immagini/"+ w.toString() + ".jpeg");
 			        Image image = new Image(file.toURI().toString(), 100, 100, false, false);
 			        _imageView.setImage(image);

@@ -5,7 +5,6 @@ import java.util.List;
 
 import persistence.sib.Ontology;
 import persistence.sib.Triple;
-import utils.Utilities;
 
 public class RegisteredUser {
 	private String _email;

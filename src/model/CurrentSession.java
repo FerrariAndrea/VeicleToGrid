@@ -33,6 +33,13 @@ public class CurrentSession implements ISubject<RegisteredUser>{
 		return _stato.getRegisteredUser();
 	}
 	
+	public void reset() {
+		if(_stato.getRegisteredUser() != null) {
+			_stato = _stato.Logout();
+			notifyObserver();
+		}
+	}
+	
 	@Override
 	public void attachObserver(IObserver<RegisteredUser> observer) {
 		_observer.add(observer);

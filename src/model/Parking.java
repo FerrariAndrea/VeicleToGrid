@@ -20,7 +20,7 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 		_observer = new ArrayList<>();
 		NormalParkingSpaceFactory factory = new NormalParkingSpaceFactory();
 		
-		for(int i = 0; i < ConstantProject.numberNormalParkingSpace; i++){
+		for(int i = 0; i < Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("numberNormalParkingSpace").getValue()); i++){
 			_parkingSpace.add(factory.CreateParkingSpace(i));
 		}
 		//this.createNewReserving(new RegisteredUser("ciao", "ciao", "pluto"), LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 41)), LocalDateTime.of(LocalDate.now(), LocalTime.of(20, 41)), 30);
@@ -61,9 +61,9 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 		if(startTimeReserving.isBefore(Document.GetInstance().getTime())) throw new IllegalArgumentException("The start time of reserving is before the actual time");
 		if(startTimeReserving.isAfter(endTimeReserving)) throw new IllegalArgumentException("The end time of reserving is before the start time");
 		Duration duration = Duration.between(startTimeReserving, endTimeReserving);
-		if(duration.toMinutes() < ConstantProject.minDurationCarPark || duration.toMinutes() > ConstantProject.maxDurationCarPark) throw new IllegalArgumentException("The reserving must be between one and eight hours");
+		if(duration.toMinutes() < Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("minDurationCarPark").getValue()) || duration.toMinutes() > Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxDurationCarPark").getValue())) throw new IllegalArgumentException("The reserving must be between one and eight hours");
 		
-		if(Duration.between(Document.GetInstance().getTime(), startTimeReserving).toMinutes() < ConstantProject.minTimeToNowForReserving) throw new IllegalArgumentException("There must be at least half an hour between the reservation and the current time");
+		if(Duration.between(Document.GetInstance().getTime(), startTimeReserving).toMinutes() < Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("minTimeToNowForReserving").getValue())) throw new IllegalArgumentException("There must be at least half an hour between the reservation and the current time");
 		
 		for(ParkingSpace p : _parkingSpace){
 			if(p.insertReserving(user, startTimeReserving, endTimeReserving, minCharge)) { notifyObserver(); return true; }
@@ -87,7 +87,7 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 	}
 	
 	private ParkingSpace findParkingSpaceWithMostTimeFree(){
-		long best = ConstantProject.minDurationCarPark;
+		long best = Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("minDurationCarPark").getValue());
 		
 		for(ParkingSpace p : _parkingSpace){
 			if(p.isFree())
@@ -139,5 +139,12 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 			ris.addAll(i.next().toTriple(s,Ontology.vtg_isComposed));
 		}
 		return ris;
+	}
+	
+	public void reset() {
+		for(ParkingSpace p : _parkingSpace) {
+			p.reset();
+		}
+		notifyObserver();
 	}
 }

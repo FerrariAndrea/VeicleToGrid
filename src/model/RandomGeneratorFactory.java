@@ -57,7 +57,7 @@ public class RandomGeneratorFactory {
 					
 					if(_random.nextDouble() <= probability){
 						//l'evento si verificherà, lo creo
-						ParkingCostumerEntryEvent event = new ParkingCostumerEntryEvent(_random.nextInt(ConstantProject.maximumVehicleCapacityWhenArriveToParkingSpace - 1) + 1);
+						ParkingCostumerEntryEvent event = new ParkingCostumerEntryEvent(_random.nextInt(Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maximumVehicleCapacityWhenArriveToParkingSpace").getValue()) - 1) + 1);
 						
 						//aggiungo l'evento nel ContainerEvent per poter poi essere schedulato
 						ContainerEvent.GetInstance().addEvent(event);
@@ -68,6 +68,7 @@ public class RandomGeneratorFactory {
 					MySemaphore sem = new MySemaphore(0, Document.GetInstance().getTime().plusMinutes(timeToSleep));
 					ContainerEvent.GetInstance().addSemaphore(sem);
 					sem.acquire();
+					if(Document.GetInstance().isInPause()) break; 
 					
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -143,6 +144,7 @@ public class RandomGeneratorFactory {
 					MySemaphore sem = new MySemaphore(0, Document.GetInstance().getTime().truncatedTo(ChronoUnit.DAYS).plusDays(1).plusMinutes(1));
 					ContainerEvent.GetInstance().addSemaphore(sem);
 					sem.acquire();
+					if(Document.GetInstance().isInPause()) break;
 					
 					if(!Document.GetInstance().isExit()){
 					
@@ -193,17 +195,18 @@ public class RandomGeneratorFactory {
 		public void run() {
 			try {
 				//calcolo il tempo arbitrario dopo il quale dovrà generare l'evento di uscita del cliente
-				long maxTime = ConstantProject.maxDurationCarPark;
+				long maxTime = Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxDurationCarPark").getValue());
 				if(_p.getReserving().size() > 0) maxTime = Duration.between(Document.GetInstance().getTime(), _p.getReserving().first().getStartTimeReserving()).toMinutes();
-				if(maxTime > ConstantProject.maxDurationCarPark) maxTime = ConstantProject.maxDurationCarPark;
-				long time = ThreadLocalRandom.current().nextLong(ConstantProject.minDurationCarPark -1 , maxTime) + 1;
+				if(maxTime > Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxDurationCarPark").getValue())) maxTime = Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxDurationCarPark").getValue());
+				long time = ThreadLocalRandom.current().nextLong(Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("minDurationCarPark").getValue()) -1 , maxTime) + 1;
+				
 				
 				//mi sospendo su un semaforo privato
 				MySemaphore sem = new MySemaphore(0, Document.GetInstance().getTime().plusMinutes(time));
 				ContainerEvent.GetInstance().addSemaphore(sem);
 				sem.acquire();
 				
-				if(!Document.GetInstance().isExit()){
+				if(!Document.GetInstance().isExit() && !Document.GetInstance().isInPause()){
 				
 					//creo l'evento
 					ParkingCostumerExitEvent event = new ParkingCostumerExitEvent(_p);

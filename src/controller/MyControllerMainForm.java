@@ -43,7 +43,7 @@ import presentation.*;
 
 public class MyControllerMainForm implements Initializable {
 
-	private Stage primaryStage = null, controlStage = null, wheaterStage = null, loginStage = null;
+	private Stage controlStage = null, wheaterStage = null, loginStage = null;
 	
     @FXML
     private Button LoginButton;
@@ -222,13 +222,16 @@ public class MyControllerMainForm implements Initializable {
     	if(controlStage == null){
     		controlStage = new Stage();
 			controlStage.resizableProperty().setValue(Boolean.FALSE);
-			AnchorPane controlPanel = (AnchorPane) FXMLLoader.load(getClass().getResource("/presentation/panelControlForm.fxml"));
-			Scene scene = new Scene(controlPanel, 400, 300);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/panelControlForm.fxml"));
+			AnchorPane controlPanel = (AnchorPane) loader.load();
+			MyControllerPanelControlForm controller = (MyControllerPanelControlForm) loader.getController();
+			controller.setMain(logTextArea);
+			Scene scene = new Scene(controlPanel, 700, 300);
 			controlStage.setScene(scene);
 			controlStage.show();
 			
 			Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-			controlStage.setX((primScreenBounds.getWidth() - primaryStage.getWidth() - controlStage.getWidth()) /4);
+			controlStage.setX((primScreenBounds.getWidth() - ((Stage) labelNickName.getScene().getWindow()).getWidth() - controlStage.getWidth()) /4);
 			controlStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 		          public void handle(WindowEvent we) {
 		        		  fileViewPanelControl.setDisable(false);
@@ -302,9 +305,5 @@ public class MyControllerMainForm implements Initializable {
 		    	CurrentSession.GetInstance().Logout();
 		    }
 		}
-    }
-    
-    public void setStage(Stage stage){
-    	this.primaryStage = stage;
     }
 }
