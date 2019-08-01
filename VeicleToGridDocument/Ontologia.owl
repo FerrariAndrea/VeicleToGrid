@@ -50,6 +50,23 @@ Lo scopo è l&apos;analisi del consumo energetico non indipendente, quindi trami
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#time -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#time"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Object Properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -190,7 +207,7 @@ Un RegisteredUser pè proprietario di una Reserving</rdfs:comment>
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#actualCharge">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Storage"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
         <rdfs:comment>Carica attuale dello storage</rdfs:comment>
     </owl:DatatypeProperty>
     
@@ -275,7 +292,7 @@ Viene assegnato da un BrokerId, che attualmente li genera univocamente solo per 
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#hasNickname">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#RegisteredUser"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#Name"/>
         <rdfs:comment>Possesso di un nickname
 
 Utilizzo:
@@ -466,7 +483,7 @@ ParkingSpace è occupato e il veicolo posteggiato è elettrico e con una carica 
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#wheaterAt">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid#Wheater"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#time"/>
         <rdfs:comment>Il codominio è di tipo rdfs:Literal perchè non era presente un tipo che rapresentasse l&apos;orario escluso della data.</rdfs:comment>
         <rdfs:comment>Indica l&apos;orario della previsione
 

@@ -11,9 +11,13 @@ public class Ontology {
 	public static String LITERAL = "literal";
 	public static String LITERAL_INTEGER = "^^xsd:integer";
 	public static String LITERAL_FLOAT = "^^xsd:float";
+	public static String LITERAL_DOUBLE = "^^xsd:double";
 	public static String LITERAL_DATE = "^^xsd:datetimestamp";
 	public static String LITERAL_BOOL = "^^xsd:boolean";
 	public static String LITERAL_DECIMAL = "^^xsd:decimal";
+	public static String LITERAL_TIME = "^^xsd:time";
+	public static String LITERAL_STRING = "^^xsd:string";
+	public static String LITERAL_NAME = "^^xsd:Name";
 	
 	public static String UNKNOW = "";
 	public static String SEPARATOR_URI = "#";
@@ -70,8 +74,11 @@ public class Ontology {
 		//prefix
 		_prefixsRef.put("rdf","http://www.w3.org/1999/02/22-rdf-syntax-ns/");
 		_prefixsRef.put("vtg","http://www.semanticweb.org/tsg/ontologies/2019/itunibo/veicletogrid/");
-		_prefixsRef.put("app","http://veicletogridsimulator/");
+		_prefixsRef.put("app","http://veicletogridsimulator/#");
 		
+		_objectTypeIfHasPredicate.put(vtg_Nickname,LITERAL_NAME);	
+		_objectTypeIfHasPredicate.put(vtg_hasEmail,LITERAL_STRING);	
+		_objectTypeIfHasPredicate.put(vtg_Password,LITERAL_STRING);		
 		_objectTypeIfHasPredicate.put(rdf_type,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_SimulationScreen,LITERAL_FLOAT);
 		_objectTypeIfHasPredicate.put(vtg_chargingSpeedStorageByEnel,LITERAL_FLOAT);
@@ -91,22 +98,18 @@ public class Ontology {
 		_objectTypeIfHasPredicate.put(vtg_timeStamp,LITERAL_DATE);
 		_objectTypeIfHasPredicate.put(vtg_hasWheater,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_inDate,LITERAL_DATE);
-		_objectTypeIfHasPredicate.put(vtg_wheaterAt,LITERAL);
+		_objectTypeIfHasPredicate.put(vtg_wheaterAt,LITERAL_TIME);
 		_objectTypeIfHasPredicate.put(vtg_wheaterIs,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_hasReservations,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_isComposed,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_hasId,LITERAL_INTEGER);
 		_objectTypeIfHasPredicate.put(vtg_isBusy,LITERAL_BOOL);
-		_objectTypeIfHasPredicate.put(vtg_parkingVeicleStorage,LITERAL_INTEGER);
+		_objectTypeIfHasPredicate.put(vtg_parkingVeicleStorage,LITERAL_DOUBLE);
 		_objectTypeIfHasPredicate.put(vtg_startTimeReserving,LITERAL_DATE);
 		_objectTypeIfHasPredicate.put(vtg_endTimeReserving,LITERAL_DATE);
 		_objectTypeIfHasPredicate.put(vtg_isReferedTo,RESOURCE);
 		_objectTypeIfHasPredicate.put(vtg_owner,RESOURCE);
-		_objectTypeIfHasPredicate.put(vtg_actualCharge,LITERAL_FLOAT);
-		_objectTypeIfHasPredicate.put(vtg_hasEmail,LITERAL);
-		_objectTypeIfHasPredicate.put(vtg_Nickname,LITERAL);
-		_objectTypeIfHasPredicate.put(vtg_Password,LITERAL);
-
+		_objectTypeIfHasPredicate.put(vtg_actualCharge,LITERAL_DOUBLE);
 		
 	}
 	

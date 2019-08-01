@@ -203,6 +203,7 @@ public Triple(String _subject,String _predicate,String _object) {
 	}
 	*/
 	public String toStringForTurtle(){
+
 		String ris ="";
 				
 		if(Ontology.LITERAL == _subjectType) {//inutile un soggetto non può essere un literale
@@ -241,9 +242,59 @@ public Triple(String _subject,String _predicate,String _object) {
 				ris+="<"+_object+ "> ";			
 			}			
 		}else {
-			ris+=""+ _object+"'"+_objectType+" ";
+			ris+="'"+ _object+"'"+_objectType+" ";
 		}
-		ris += ".";
+		return ris;
+		
+	}
+	public String toStringForTurtleSubject(){
+		String ris ="";
+				
+		if(Ontology.LITERAL == _subjectType) {//inutile un soggetto non può essere un literale
+			ris+="'"+ _subject+"' ";		
+		}else if(Ontology.RESOURCE ==_subjectType){
+			if(_subjectNS!="") {
+				if(Ontology.isValidPrefix(_predicateNS)) {
+					ris+=_subjectNS +Ontology.SEPARATOR_PREFIX +_subject+ " ";
+				}else {
+					ris+="<"+ _subjectNS +Ontology.SEPARATOR_URI +_subject+"> ";
+				}		
+			}else {
+				ris+="<"+_subject+ "> ";			
+			}			
+		}else {
+			ris+="'"+ _subject+"'"+_subjectType+" ";
+		}
+		return ris;
+		
+	}
+	
+	public String toStringForTurtlePredAndObj(){
+		String ris ="";
+				
+
+		
+		if(Ontology.isValidPrefix(_predicateNS)) {
+			ris+=_predicateNS +Ontology.SEPARATOR_PREFIX +_predicate+ " ";
+		}else {
+			ris+="<"+ _predicateNS +Ontology.SEPARATOR_URI +_predicate+"> ";
+		}
+		
+		if(Ontology.LITERAL == _objectType) {
+			ris+="'"+ _object+"' ";			
+		}else if(Ontology.RESOURCE ==_objectType){
+			if(_objectNS!="") {
+				if(Ontology.isValidPrefix(_predicateNS)) {
+					ris+=_objectNS +Ontology.SEPARATOR_PREFIX +_object+ " ";
+				}else {
+					ris+="<"+ _objectNS +Ontology.SEPARATOR_URI +_object+"> ";
+				}		
+			}else {
+				ris+="<"+_object+ "> ";			
+			}			
+		}else {
+			ris+="'"+ _object+"'"+_objectType+" ";
+		}
 		return ris;
 		
 	}

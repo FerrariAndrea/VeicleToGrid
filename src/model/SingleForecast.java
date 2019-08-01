@@ -97,7 +97,7 @@ public class SingleForecast {
 			ris.add(new Triple(s,Ontology.vtg_hasWheater,s2));			
 			TimeSlot temp =i.next();
 			ris.add(new Triple(s2,Ontology.vtg_wheaterAt,Utilities.getTimeStamp(temp._start)));			
-			ris.add(new Triple(s2,Ontology.vtg_wheaterIs,_map.get(temp).toString()));			
+			ris.add(new Triple(s2,Ontology.vtg_wheaterIs,"vtg:"+_map.get(temp).toString()));			
 		}		
 		return ris;
 	}
