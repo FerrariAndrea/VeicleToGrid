@@ -297,9 +297,9 @@ public abstract class ParkingSpace implements ISubject<ParkingSpace>{
 	
 	public List<Triple> toTriple(String parent,String predicateOfParent){
 		List<Triple> ris = new ArrayList<Triple>();
-		String s = Ontology.APP_NS+ getTripleSubject();		
+		String s = Ontology.APP_NS+ getTripleSubject();	
 		ris.add(new Triple(parent,predicateOfParent,s));
-		
+		ris.add(new Triple(s,Ontology.rdf_type,Ontology.vtg_ParkingSpace));
 		ris.add(new Triple(s,Ontology.vtg_hasId,this._ID+""));
 		ris.add(new Triple(s,Ontology.vtg_isBusy,Boolean.toString(!this.isFree())));
 		try{

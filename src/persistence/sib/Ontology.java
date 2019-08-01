@@ -26,6 +26,13 @@ public class Ontology {
 	public static String APP_NS = "app"+SEPARATOR_PREFIX;//"http://veicletogridsimulator/"+SEPARATOR_URI;
 	//--------------------------------------------------ONTOLOGIA APLLICAZIONE
 	public static String vtg_SimulationScreen ="vtg:SimulationScreen";
+	public static String vtg_ParkingSpace ="vtg:ParkingSpace";
+	public static String vtg_RegisteredUser ="vtg:RegisteredUser";
+	public static String vtg_Reserving ="vtg:Reserving";
+	public static String vtg_Parking ="vtg:Parking";
+	public static String vtg_SingleForecast ="vtg:SingleForecast";
+	public static String vtg_Storage ="vtg:Storage";
+	public static String vtg_Wheater ="vtg:Wheater";	
 	public static String vtg_chargingSpeedStorageByEnel ="vtg:chargingSpeedStorageByEnel";
 	public static String vtg_chargingVehiclesSpeed ="vtg:chargingVehiclesSpeed";
 	public static String vtg_hasForecast ="vtg:hasForecast"; 
@@ -80,7 +87,6 @@ public class Ontology {
 		_objectTypeIfHasPredicate.put(vtg_hasEmail,LITERAL_STRING);	
 		_objectTypeIfHasPredicate.put(vtg_Password,LITERAL_STRING);		
 		_objectTypeIfHasPredicate.put(rdf_type,RESOURCE);
-		_objectTypeIfHasPredicate.put(vtg_SimulationScreen,LITERAL_FLOAT);
 		_objectTypeIfHasPredicate.put(vtg_chargingSpeedStorageByEnel,LITERAL_FLOAT);
 		_objectTypeIfHasPredicate.put(vtg_chargingVehiclesSpeed,LITERAL_INTEGER);
 		_objectTypeIfHasPredicate.put(vtg_hasForecast,RESOURCE);

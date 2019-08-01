@@ -134,7 +134,7 @@ public class Parking implements ISubject<ArrayList<Reserving>>{
 		String s = Ontology.APP_NS+"Parking1";
 		List<Triple> ris = new ArrayList<Triple>();
 		ris.add(new Triple(parent,predicateOfParent,s));
-		
+		ris.add(new Triple(s,Ontology.rdf_type,Ontology.vtg_Parking));
 		for (Iterator<ParkingSpace> i = _parkingSpace.iterator(); i.hasNext();) {			
 			ris.addAll(i.next().toTriple(s,Ontology.vtg_isComposed));
 		}

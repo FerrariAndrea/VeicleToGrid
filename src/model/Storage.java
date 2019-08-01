@@ -62,6 +62,7 @@ public class Storage implements ISubject<Storage>{
 		List<Triple> ris = new ArrayList<Triple>();			
 		String s = Ontology.APP_NS+ "BuildingBattery";
 		ris.add(new Triple(parent,predicateOfParent,s));
+		ris.add(new Triple(s,Ontology.rdf_type,Ontology.vtg_Storage));
 		ris.add(new Triple(s,Ontology.vtg_actualCharge,Double.toString(_actualStorage)));
 	return ris;
 	}

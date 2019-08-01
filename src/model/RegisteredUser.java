@@ -51,7 +51,7 @@ public class RegisteredUser {
 		List<Triple> ris = new ArrayList<Triple>();
 		String s = Ontology.APP_NS+ getTripleSubject();
 		ris.add(new Triple(parent,predicateOfParent,s));
-		
+		ris.add(new Triple(s,Ontology.rdf_type,Ontology.vtg_RegisteredUser));
 		ris.add(new Triple(s,Ontology.vtg_Nickname,this._nickname));
 		ris.add(new Triple(s,Ontology.vtg_Password,this._password));
 		ris.add(new Triple(s,Ontology.vtg_hasEmail,this._email));

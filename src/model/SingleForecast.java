@@ -86,16 +86,17 @@ public class SingleForecast {
 	}
 	
 	public List<Triple> toTriple(String s){
-		List<Triple> ris = new ArrayList<Triple>();
-		
-		ris.add(new Triple(s,Ontology.vtg_inDate,Utilities.getTimeStamp(this._date)));	
-		
+		List<Triple> ris = new ArrayList<Triple>();		
+		ris.add(new Triple(s,Ontology.rdf_type,Ontology.vtg_SingleForecast));
+		ris.add(new Triple(s,Ontology.vtg_inDate,Utilities.getTimeStamp(this._date)));
 		int counter =0;
 		for (Iterator<TimeSlot> i = _map.keySet().iterator(); i.hasNext();) {	
 			String s2 = Ontology.APP_NS+"Wheater_"+counter;
 			counter++;
+			
 			ris.add(new Triple(s,Ontology.vtg_hasWheater,s2));			
 			TimeSlot temp =i.next();
+			ris.add(new Triple(s2,Ontology.rdf_type,Ontology.vtg_Wheater));			
 			ris.add(new Triple(s2,Ontology.vtg_wheaterAt,Utilities.getTimeStamp(temp._start)));			
 			ris.add(new Triple(s2,Ontology.vtg_wheaterIs,"vtg:"+_map.get(temp).toString()));			
 		}		
