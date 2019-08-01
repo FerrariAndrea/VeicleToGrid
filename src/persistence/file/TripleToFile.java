@@ -60,9 +60,9 @@ public class TripleToFile {
 		public void insert(List<Triple> t) throws Exception {
 				String name = _fullpath ;
 				if(_newNameForNewInsert) {
-					name+="_"+System.currentTimeMillis()+".txt";
+					name+="_"+System.currentTimeMillis()+".ttl";
 				}else {
-					name+=".txt";
+					name+=".ttl";
 				}
 			    BufferedWriter writer = new BufferedWriter(new FileWriter(name, true));
 			    for(Iterator<String> keys = Ontology._prefixsRef.keySet().iterator();keys.hasNext();) {
