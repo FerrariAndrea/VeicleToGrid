@@ -21,8 +21,10 @@ public class ParametersSimulation {
 		ParameterInformationListValue<String> p = new ParameterInformationListValue<>("Policy of storage", String.class,values, false);
 		parameters.put("policy", p);
 		values.clear();
-		values.add("File.txt");
+		values.add("File.ttl");
 		values.add("SIB");
+		values.add("Both");
+		values.add("-");
 		p = new ParameterInformationListValue<>("Where do you want to save output?", String.class,values, false); 
 		parameters.put("Location output", p);
 		ParameterInformationSingleValue<Integer> pI = new ParameterInformationSingleValue<>("Min duration for car parking (in minutes)" ,Integer.class, 60, false);
@@ -33,7 +35,7 @@ public class ParametersSimulation {
 		parameters.put("chargingSpeedStorageByEnel", pI);
 		pI = new ParameterInformationSingleValue<>("Velocity to charge the vehicles (KW)" ,Integer.class, 20, false);
 		parameters.put("chargingVehiclesSpeed", pI);
-		pI = new ParameterInformationSingleValue<>("Max charge of vehicle (KW/h)" ,Integer.class, 80, false);
+		pI = new ParameterInformationSingleValue<>("Max charge of vehicle (KW/h)" ,Integer.class, 80, true);
 		parameters.put("maxChargeVehicleStorage", pI);
 		pI = new ParameterInformationSingleValue<>("Max charge of vehicle when arrive to parking (KW/h)" ,Integer.class, 60, false);
 		parameters.put("maximumVehicleCapacityWhenArriveToParkingSpace", pI);

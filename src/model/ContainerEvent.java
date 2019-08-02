@@ -90,32 +90,27 @@ public class ContainerEvent implements ISubject<Log>{
 		}
 	}
 	
+	public void exit() {
+		_lockSem.lock();
+		
+		for(MySemaphore s : _sem)
+			s.release();
+		_sem.clear();
+		
+		_lockSem.unlock();
+	}
+	
 	public void reset() {
 		_lockEvent.lock();
-		_lockSem.lock();
 		//reset eventi futuri
 		_randomEvent.clear();
 		
 		//reset Semafori
-		for(MySemaphore s : _sem)
-			if(s.isReady()){
-				s.release();
-		}
-		_sem.clear();
-		
-		
-		IGeneratorEvent g = RandomGeneratorFactory.CreateGeneratorEntryEvent();
-    	Thread entryCostumer = new Thread(g);
-    	entryCostumer.start();
-    	g = RandomGeneratorFactory.CreateGeneratorWheaterEvent();
-    	Thread wheaterForecast = new Thread(g);
-    	wheaterForecast.start();
-    	
+		exit();
 		
 		//reset log
 		_logs.clear();
 		
-		_lockSem.unlock();
 		_lockEvent.unlock();
 	}
 	

@@ -101,9 +101,10 @@ public class Document implements ISubject<LocalDateTime>{
     
     //metodo per terminare l'applicazione
     public void exit(){
+    	_exitApplication = true;
     	if(_step.isInPause()) resumePause();
-		_exitApplication = true;
-		if(CurrentSession.GetInstance().getRegisteredUser() != null) CurrentSession.GetInstance().Logout();
+    	if(Document.GetInstance().isStart() && !isInPause()) saveOnSIB();
+		ContainerEvent.GetInstance().exit();
 	}
     
     //metodo per resettare il simulatore
@@ -126,6 +127,14 @@ public class Document implements ISubject<LocalDateTime>{
     	
     	//reset semafori ed eventi
     	ContainerEvent.GetInstance().reset();
+    	
+    	//faccio ripartire i nuovi generatori
+    	IGeneratorEvent g = RandomGeneratorFactory.CreateGeneratorEntryEvent();
+    	Thread entryCostumer = new Thread(g);
+    	entryCostumer.start();
+    	g = RandomGeneratorFactory.CreateGeneratorWheaterEvent();
+    	Thread wheaterForecast = new Thread(g);
+    	wheaterForecast.start();
     	
     	//esco da un eventuale sessione corrente
     	CurrentSession.GetInstance().reset();

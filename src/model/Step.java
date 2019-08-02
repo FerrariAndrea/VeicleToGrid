@@ -37,9 +37,6 @@ public class Step implements Runnable {
 				Thread.sleep(Document.GetInstance().getSleepTimeStep());
 			}
 			
-			//terminazione applicazione, gestione semafori per terminare gli altri Thread generatori di eventi casuali
-			ContainerEvent.GetInstance().attivateSemaphore();
-			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

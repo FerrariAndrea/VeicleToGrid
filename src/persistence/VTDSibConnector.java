@@ -23,7 +23,7 @@ public class VTDSibConnector {
 		if(location.equals("SIB")) {
 			if(!joinDone) {KPConnector.GetInstance().join();joinDone=true;}			
 			KPConnector.GetInstance().insert(triples,MAX_RATE);
-		}else if(location.equals("File.txt")) {
+		}else if(location.equals("File.ttl")) {
 			TripleToFile.GetInstance().insert(triples);
 		}else if(location.equals("Both")) {
 			if(!joinDone) {KPConnector.GetInstance().join();joinDone=true;}

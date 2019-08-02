@@ -11,6 +11,7 @@ import com.sun.javafx.charts.Legend;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -200,21 +201,25 @@ public class MyControllerMainForm implements Initializable {
         panelParking.getChildren().add(sp);
 	}
 	
-	@FXML
-    void clickViewClose(ActionEvent event) {
+	public static void closeMain(Event event) {
 		//evento chiusura della main windows
-		Optional<ButtonType> result = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to close the application?").showAndWait();
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to close the application?");
+		alert.setHeaderText("Ask confirmation");
+		alert.setTitle("Warning");
+		Optional<ButtonType> result = alert.showAndWait();
 	    if (result.isPresent() && result.get() == ButtonType.OK) {
 	    	//chiusura confermata
 	    	
 	    	if(Document.GetInstance().isStart() && !Document.GetInstance().isExit()) Document.GetInstance().exit();
-	    	if(Document.GetInstance().isStart()){
-	    		//salvo sul database tutti gli oggetti
-	    		Document.GetInstance().saveOnSIB();
-	    	}
 	    	
+	    	//chiudo tutte le finestre aperte
 	    	Platform.exit();
 	    } else event.consume();	//fermo la chiusura dell'applicazione
+	}
+	
+	@FXML
+    void clickViewClose(ActionEvent event) {
+	    closeMain(event);
     }
 
     @FXML

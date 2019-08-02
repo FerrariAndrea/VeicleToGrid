@@ -34,7 +34,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import model.Document;
 import model.ParameterInformation;
 import model.ParametersSimulation;
 import model.ParameterInformation.ParameterInformationListValue;
@@ -213,22 +212,6 @@ public class MyControllerInitialForm implements Initializable{
 	}
 	
 	private void closeWindowEventMainForm(WindowEvent event) {
-		//evento chiusura della main windows
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to close the application?");
-		alert.setHeaderText("Ask confirmation");
-		alert.setTitle("Warning");
-		Optional<ButtonType> result = alert.showAndWait();
-	    if (result.isPresent() && result.get() == ButtonType.OK) {
-	    	//chiusura confermata
-	    	
-	    	if(Document.GetInstance().isStart() && !Document.GetInstance().isExit()) Document.GetInstance().exit();
-	    	if(Document.GetInstance().isStart()){
-	    		//salvo sul database tutti gli oggetti
-	    		Document.GetInstance().saveOnSIB();
-	    	}
-	    	
-	    	//chiudo tutte le finestre aperte
-	    	Platform.exit();
-	    } else event.consume();	//fermo la chiusura dell'applicazione
+	    MyControllerMainForm.closeMain(event);
 	}
 }

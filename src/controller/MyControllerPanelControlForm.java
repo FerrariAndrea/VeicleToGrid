@@ -278,6 +278,16 @@ public class MyControllerPanelControlForm implements Initializable{
 				if(cell.getValue().toString().equals("Cheap"))Storage.GetInstance().setPolicy(StoragePolicyFactory.CreateCheapStoragePolicy());
 				else Storage.GetInstance().setPolicy(StoragePolicyFactory.CreateExpensiveStoragePolicy());
 			}
+			if(cell.getParameterName().equals("maximumVehicleCapacityWhenArriveToParkingSpace")) {
+				int max = Integer.class.cast(ParametersSimulation.GetInstance().getInformationOfParameter("maxChargeVehicleStorage").getValue());
+				if(max < Integer.class.cast(cell.getValue())) {
+					Alert alert = new Alert(Alert.AlertType.ERROR, "Max charge of vehicle ("+ max + "KW/h) is less than the max possible intial value of charge of a vehicle when it will arrive to the parking");
+					alert.setHeaderText("Error");
+					alert.setTitle("Error");
+					alert.showAndWait();
+					return false;
+				}
+			}
 		}
 		if(!allModified) {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "There are some parameters that aren't modified (They have the default value). Do you want to continue?");
