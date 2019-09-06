@@ -1,0 +1,30 @@
+app:ParkingSpace_4 rdf:type vtg:ParkingSpace ;
+	vtg:hasId '4'^^xsd:integer .
+	vtg:isBusy 'true'^^xsd:boolean .
+	vtg:parkingVeicleStorage '44.66666666666671'^^xsd:double .
+	
+	
+(soggetto)-->(predicato)-->(oggetto)
+
+Soggetto e predicato sono sempre IRI
+L'Oggetto può essere Literal;IRI;BlankNode
+Literal è una stringa di caratteri e può essere duplicata, IRI è univoco
+
+Literal viene differenziato per tipi così ^^xsd:integer (che è dunque l'attributo dell'oggetto).
+
+il literal è sempre tra apici
+
+se l'ogetto è un iri esepio:
+app:Parking1 rdf:type vtg:Parking ;
+	vtg:isComposed app:ParkingSpace_0 .
+	
+	
+GLi individual sono identificati da IRI
+	
+ParkingSpace_4-->è di tipo-->ParkingSpace
+
+ParkingSpace_4--> ha come id --> 4
+
+
+
+

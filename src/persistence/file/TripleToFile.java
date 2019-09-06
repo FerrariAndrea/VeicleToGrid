@@ -19,7 +19,7 @@ import persistence.sib.Triple;
 
 public class TripleToFile {
 		//-----------------default setting
-		private static String default_file_name = "VeicleToGridProgect";		
+		private static String default_file_name = "VehicleToGridProgect";		
 		private static String default_file_path = "";		
 		private static String indent ="\t";
 		
