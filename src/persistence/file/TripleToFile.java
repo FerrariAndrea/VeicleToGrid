@@ -16,7 +16,7 @@ import model.SingleForecast.TimeSlot;
 import persistence.sib.KPConnector;
 import persistence.sib.Ontology;
 import persistence.sib.Triple;
-
+//
 public class TripleToFile {
 		//-----------------default setting
 		private static String default_file_name = "VehicleToGridProgect";		
