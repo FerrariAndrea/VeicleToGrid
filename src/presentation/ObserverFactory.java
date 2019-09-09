@@ -258,7 +258,12 @@ public class ObserverFactory {
 			if(getControl().getTabs().size() == WheaterForecast.GetInstance().getForecast().size()){
 				Document.GetInstance().detachObserver(_queue.poll());
 				list.remove(0);
-				Document.GetInstance().attachObserver(_queue.peek());
+				try {
+
+					Document.GetInstance().attachObserver(_queue.peek());
+				}catch(Exception ex){
+					//
+				}
 			}
 			
 			Platform.runLater(new Runnable(){
