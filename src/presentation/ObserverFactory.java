@@ -1,6 +1,7 @@
 package presentation;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -276,13 +277,18 @@ public class ObserverFactory {
 					}
 					
 					//inserisco la nuova previsione
-					creatingNewTab(forecast);
+					try {
+						creatingNewTab(forecast);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				
 			});
 		}
 
-		private void creatingNewTab(SingleForecast forecast) {
+		private void creatingNewTab(SingleForecast forecast) throws IOException {
 			
 			Tab tab = new Tab();
 			IObserver<LocalDateTime> o = new MyTabObserver(tab, forecast);
@@ -296,7 +302,7 @@ public class ObserverFactory {
 			private ListView<MyHBox> _listView = new ListView<MyHBox>();
 			private LocalDate _dateTab;
 
-			public MyTabObserver(Tab control, SingleForecast forecast) {
+			public MyTabObserver(Tab control, SingleForecast forecast) throws IOException {
 				super(control);
 				
 				_dateTab = forecast.getDate();
@@ -351,17 +357,18 @@ public class ObserverFactory {
 				private Label _label = new Label();
 				private ImageView _imageView = new ImageView();
 				
-				public MyHBox(TimeSlot t, Wheater w){
+				public MyHBox(TimeSlot t, Wheater w) throws IOException {
 					super();
 					this._t = t;
 					_label.setText(t.toString());
 					_label.setAlignment(Pos.CENTER);
 					_label.setMaxWidth(Double.MAX_VALUE);
 					HBox.setHgrow(_label, Priority.ALWAYS);
-					
+					String path =System.getProperty("user.dir");
+					//System.out.println("---->"+path);
 					File file = null;
-					if(isNight() && w.compareTo(Wheater.Sunny) == 0) file = new File("./immagini/moon.jpeg");
-					else file = new File("./immagini/"+ w.toString() + ".jpeg");
+					if(isNight() && w.compareTo(Wheater.Sunny) == 0) file = new File(path+"\\img\\moon.jpeg");// new File("../immagini/moon.jpeg");
+					else file = new File(path+"\\img\\"+w.toString() + ".jpeg");
 			        Image image = new Image(file.toURI().toString(), 100, 100, false, false);
 			        _imageView.setImage(image);
 			        //this.setStyle("-fx-border-color: red;");
