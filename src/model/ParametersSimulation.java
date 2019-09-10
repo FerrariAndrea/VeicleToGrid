@@ -31,7 +31,7 @@ public class ParametersSimulation {
 		parameters.put("minDurationCarPark", pI);
 		pI = new ParameterInformationSingleValue<>("Max duration for car parking (in minutes)" ,Integer.class, 480, false);
 		parameters.put("maxDurationCarPark", pI);
-		pI = new ParameterInformationSingleValue<>("Velocity to charge the storage by Enel (KW/h)" ,Integer.class, 3, false);
+		pI = new ParameterInformationSingleValue<>("Velocity to charge the storage by Enel (KW/h)" ,Integer.class, 40, false);
 		parameters.put("chargingSpeedStorageByEnel", pI);
 		pI = new ParameterInformationSingleValue<>("Velocity to charge the vehicles (KW/h)" ,Integer.class, 20, false);
 		parameters.put("chargingVehiclesSpeed", pI);
@@ -39,11 +39,11 @@ public class ParametersSimulation {
 		parameters.put("maxChargeVehicleStorage", pI);
 		pI = new ParameterInformationSingleValue<>("Max charge of vehicle when arrive to parking (KWh)" ,Integer.class, 60, false);
 		parameters.put("maximumVehicleCapacityWhenArriveToParkingSpace", pI);
-		pI = new ParameterInformationSingleValue<>("Power genererated by panels photovoltaic when is sunny(KW)" ,Integer.class, 5, false);
+		pI = new ParameterInformationSingleValue<>("Power genererated by panels photovoltaic when is sunny(KW)" ,Integer.class, 40, false);
 		parameters.put("generatedPowerByPanelsPhotovoltaic-Sunny", pI);
-		pI = new ParameterInformationSingleValue<>("Power genererated by panels photovoltaic when is cloudy(KW)" ,Integer.class, 1, false);
+		pI = new ParameterInformationSingleValue<>("Power genererated by panels photovoltaic when is cloudy(KW)" ,Integer.class, 5, false);
 		parameters.put("generatedPowerByPanelsPhotovoltaic-Cloudy", pI);
-		pI = new ParameterInformationSingleValue<>("Power genererated by panels photovoltaic when is rainy(KW)" ,Integer.class, 0, false);
+		pI = new ParameterInformationSingleValue<>("Power genererated by panels photovoltaic when is rainy(KW)" ,Integer.class, 1, false);
 		parameters.put("generatedPowerByPanelsPhotovoltaic-Rain", pI);
 		pI = new ParameterInformationSingleValue<>("Minutes that must pass before the start of a reservation(minutes)" ,Integer.class, 30, false);
 		parameters.put("minTimeToNowForReserving", pI);

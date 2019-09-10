@@ -16,20 +16,24 @@ public class VTDSibConnector {
 	
 	
 	public static void saveSnap() throws Exception {
-		
+		try {
+			List<Triple> triples = Document.GetInstance().toTriple();
+			String location = ParametersSimulation.GetInstance().getInformationOfParameter("Location output").getValue().toString();
+			if(location.equals("SIB")) {
+				if(!joinDone) {KPConnector.GetInstance().join();joinDone=true;}			
+				KPConnector.GetInstance().insert(triples,MAX_RATE);
+			}else if(location.equals("File.ttl")) {
+				TripleToFile.GetInstance().insert(triples);
+			}else if(location.equals("Both")) {
+				if(!joinDone) {KPConnector.GetInstance().join();joinDone=true;}
+				KPConnector.GetInstance().insert(triples,MAX_RATE);
+				TripleToFile.GetInstance().insert(triples);
+			}//else nothing
+		}catch(Exception e) {
+			
+		}
 
-		List<Triple> triples = Document.GetInstance().toTriple();
-		String location = ParametersSimulation.GetInstance().getInformationOfParameter("Location output").getValue().toString();
-		if(location.equals("SIB")) {
-			if(!joinDone) {KPConnector.GetInstance().join();joinDone=true;}			
-			KPConnector.GetInstance().insert(triples,MAX_RATE);
-		}else if(location.equals("File.ttl")) {
-			TripleToFile.GetInstance().insert(triples);
-		}else if(location.equals("Both")) {
-			if(!joinDone) {KPConnector.GetInstance().join();joinDone=true;}
-			KPConnector.GetInstance().insert(triples,MAX_RATE);
-			TripleToFile.GetInstance().insert(triples);
-		}//else nothing
+	
 	}
 	
 	public static List<Triple> getSnap() throws Exception{
