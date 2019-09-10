@@ -19,7 +19,7 @@
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../immagini/pause.jpeg" />
+                  <Image url="@/immagini/pause.jpeg" />
                </image>
             </ImageView>
          </graphic>
@@ -28,7 +28,7 @@
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../immagini/stop.jpeg" />
+                  <Image url="@/immagini/stop.jpeg" />
                </image>
             </ImageView>
          </graphic>
@@ -48,7 +48,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../immagini/play.jpeg" />
+                  <Image url="@/immagini/play.jpeg" />
                </image>
             </ImageView>
          </graphic>

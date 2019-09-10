@@ -68,7 +68,7 @@
                            <children>
                               <ImageView fx:id="imageParking" fitHeight="108.0" fitWidth="129.0" layoutX="270.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="291.0" AnchorPane.rightAnchor="376.0">
                                  <image>
-                                    <Image url="@../../immagini/parking.jpeg" />
+                                    <Image url="@/immagini/parking.jpeg" />
                                  </image>
                               </ImageView>
                            </children></AnchorPane>
